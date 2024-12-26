@@ -107,12 +107,18 @@ namespace Basics.ClassLibrary
 
         public async Task<string> SwapFirstAndLastCharacters(string input)
         {
-            if (input.Length <= 1) return input;
+            if (string.IsNullOrWhiteSpace(input)) return input;
 
             char[] chars = input.ToCharArray();
-            char temp = chars[0];
-            chars[0] = chars[input.Length - 1];
-            chars[input.Length - 1] = temp;
+            var first = 0;
+            var last = chars.Length - 1;
+
+            
+            var firstChar = chars[first];
+            var lastChar = chars[last];
+
+            chars[first] = lastChar;
+            chars[last] = firstChar;
 
             return new string(chars);
         }
