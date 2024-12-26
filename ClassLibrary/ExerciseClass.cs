@@ -74,20 +74,18 @@ namespace Basics.ClassLibrary
 
         public async Task<string> NumbersInBlock(string input)
         {
-            var result = "";
-
-            result += string.Concat(Enumerable.Repeat(input, 3)
+            var block1 = string.Concat(Enumerable.Repeat(input, 3)
                 .ToArray()).Trim() + Environment.NewLine;
 
-            for (int i = 1; i <= 3; i++)
-            {
-                result += string.Concat(Enumerable.Repeat(input + " ", 2)
-                    .ToArray()).Trim() + Environment.NewLine;
-            }
+            
+            var block2 = string.Concat(Enumerable.Repeat(input + " ", 2)
+                .ToArray()).Trim() + Environment.NewLine;
+            
 
-            result += string.Concat(Enumerable.Repeat(input, 3)
+            var block3 = string.Concat(Enumerable.Repeat(input, 3)
                 .ToArray()).Trim() + Environment.NewLine;
 
+            var result = block1 + block2 + block2 + block2 + block3;
             return result.Trim();
         }
 
