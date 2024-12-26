@@ -180,15 +180,15 @@ namespace Basics.ClassLibrary
 
         public async Task<int[]> FindAllOddNumbers(int n1, int n2)
         {
-            List<int> oddList = new List<int>();
+            List<int> oddNumbers = new List<int>();
             for (int i = n1; i <= n2; i++)
             {
                 if (i % 2 != 0)
                 {
-                    oddList.Add(i);
+                    oddNumbers.Add(i);
                 }
             }
-            return oddList.ToArray();
+            return oddNumbers.ToArray();
         }
 
         public async Task<int> SumAllPrime(int n1, int n2)
@@ -314,7 +314,7 @@ namespace Basics.ClassLibrary
 
         public async Task<bool> StringFinder(string input, string lookingFor)
         {
-            return input.Contains(lookingFor) ? true : false;
+            return input.Contains(lookingFor);
         }
 
         public async Task<(int Largest, int Lowest)> FindLargestAndLowest(int n1, int n2, int n3)
