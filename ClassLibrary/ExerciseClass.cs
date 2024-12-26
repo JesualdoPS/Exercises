@@ -328,10 +328,12 @@ namespace Basics.ClassLibrary
 
         public async Task<int> NextTo20(int n1, int n2)
         {
-            int value1 = 20 - n1;
-            int value2 = 20 - n2;
+            int value1 = Math.Abs(20 - n1);
+            int value2 = Math.Abs(20 - n2);
 
-            int result = (n1 == n2) ? 0 : ((value1 < value2) ? n1 : n2);
+            if (n1 == n2) return 0;
+
+            int result = ((value1 < value2) ? n1 : n2);
             return result;
         }
 
