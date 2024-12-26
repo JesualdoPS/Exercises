@@ -394,15 +394,14 @@ namespace Basics.ClassLibrary
 
         public async Task<int[]> ArrayInverter(int[] array)
         {
-            int[] result = array.Reverse().ToArray();
+            var result = array.Reverse().ToArray();
 
             return result;
         }
 
         public async Task<int> LargestBetweenFirstAndLast(int[] array)
         {
-            int count = array.Length - 1;
-            int result = (array[0] > array[count]) ? array[0] : array[count];
+            var result = (array.First() > array.Last()) ? array.First() : array.Last();
 
             return result;
         }
