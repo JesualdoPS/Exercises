@@ -440,7 +440,10 @@ namespace Basics.ClassLibrary
             int product = 0;
             for (int i = 0; i < array.Length - 1; i++)
             {
-                product = ((array[i] * array[i + 1]) > product) ? (array[i] * array[i + 1]) : product;
+                if ((array[i] * array[i + 1]) > product) 
+                {
+                    product = (array[i] * array[i + 1]);
+                }
             }
 
             return product;
