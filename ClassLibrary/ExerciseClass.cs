@@ -520,7 +520,7 @@ namespace Basics.ClassLibrary
                 .Where(x => x == upperCase || x == lowerCase)
                 .Count();
             
-            return result;
+            return count;
         }
 
         public async Task<bool> CheckIfItsOnlyUpperOrLowerCase(string input)
