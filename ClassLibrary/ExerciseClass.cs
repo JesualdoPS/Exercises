@@ -389,7 +389,7 @@ namespace Basics.ClassLibrary
 
         public async Task<bool> FirstOrLastCompare(int[] array, int[] array2)
         {
-            return array[0] == array2[0] || array[^1] == array2[^1];
+            return array.First() == array2.First() || array.Last() == array2.Last();
         }
 
         public async Task<int[]> ArrayInverter(int[] array)
