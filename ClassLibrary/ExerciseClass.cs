@@ -423,18 +423,20 @@ namespace Basics.ClassLibrary
 
             int century = (year + 99) / 100;
             var centuryRemainder = century;
-            string result = "";
+            string romanCymbols = "";
 
             var romanNumbers = _romanNumbers.OrderByDescending(x => x.Key);
             foreach (var romanNumber in romanNumbers)
             {
-                while (centuryRemainder >= romanNumber.Key)
+                var romanCymbol = romanNumber.Value;
+                var decimalValue = romanNumber.Value;
+                while (centuryRemainder >= decimalValue)
                 {
-                    result += romanNumber.Value;
-                    centuryRemainder -= romanNumber.Key;
+                    romanCymbols += romanCymbol;
+                    centuryRemainder -= decimalValue;
                 }
             }
-            return result;
+            return romanCymbols;
         }
 
         public async Task<int> LargestProductToAdjacent(int[] array)
