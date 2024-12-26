@@ -514,7 +514,7 @@ namespace Basics.ClassLibrary
 
             foreach (var item in charList)
             {
-                result = (item == upperCase || item == lowerCase) ? result + 1 : result + 0;
+                if (item == upperCase || item == lowerCase) result++;
             }
 
             return result;
