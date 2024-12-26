@@ -4,7 +4,7 @@ namespace Basics.ClassLibrary
 {
     public class ExerciseClass
     {
-        private Dictionary<int, string> _romanCentury = new Dictionary<int, string>
+        private Dictionary<int, string> _romanNumbers = new Dictionary<int, string>
         {
             {1000, "M"}, {900, "CM"}, {500, "D"}, {400, "CD"},
             {100, "C"}, {90, "XC"}, {50, "L"}, {40, "XL"},
@@ -420,15 +420,16 @@ namespace Basics.ClassLibrary
         {
 
             int century = (year + 99) / 100;
-
+            var centuryRemainder = century;
             string result = "";
 
-            foreach (var item in _romanCentury.OrderByDescending(x => x.Key))
+            var romanNumbers = _romanNumbers.OrderByDescending(x => x.Key);
+            foreach (var romanNumber in romanNumbers)
             {
-                while (century >= item.Key)
+                while (centuryRemainder >= romanNumber.Key)
                 {
-                    result += item.Value;
-                    century -= item.Key;
+                    result += romanNumber.Value;
+                    centuryRemainder -= romanNumber.Key;
                 }
             }
             return result;
