@@ -553,13 +553,14 @@ namespace Basics.ClassLibrary
         public async Task<bool> WholeNumberAverage(int[] array)
         {
             double average = array.Average();
+            var isWholeNumberEqualToAverage = average == (int)average; ;
 
-            return (average == (int)average) ? true : false;
+            return isWholeNumberEqualToAverage;
         }
 
         public async Task<string> OrderByAlphabetical(string input)
         {
-            string result = new string(input.OrderBy(x => x).ToArray());
+            string result = new(input.OrderBy(x => x).ToArray());
             return result;
         }
 
