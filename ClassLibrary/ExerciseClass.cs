@@ -452,7 +452,7 @@ namespace Basics.ClassLibrary
         public async Task<bool> IsPalindrome(string input)
         {
             string reverseInput = new string(input.Reverse().ToArray());
-            bool result = (reverseInput == input) ? true : false;
+            bool result = reverseInput == input;
 
             return result;
         }
