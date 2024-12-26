@@ -158,8 +158,8 @@ namespace Basics.ClassLibrary
 
         public async Task<bool> CheckIfItsWithin20(int input)
         {
-            var itsWithin = Math.Abs(input - 100) <= 20 || (Math.Abs(input - 200) <= 20);
-            return itsWithin;
+            var isWithin = Math.Abs(input - 100) <= 20 || (Math.Abs(input - 200) <= 20);
+            return isWithin;
         }
 
         public async Task<string> TurnLower(string text)
@@ -170,7 +170,10 @@ namespace Basics.ClassLibrary
 
         public async Task<string> FindLongestWord(string input)
         {
-            string longestWord = input.Split(' ').OrderByDescending(p => p.Length).First();
+            string longestWord = input
+                .Split(' ')
+                .OrderByDescending(p => p.Length)
+                .First();
 
             return longestWord;
         }
