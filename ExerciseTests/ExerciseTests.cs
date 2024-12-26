@@ -1380,25 +1380,20 @@ namespace Basics.ExerciseTests
         }
 
         [TestMethod]
-        public async Task ShouldCheckIfItsOnlyNumbers()
+        [DataRow("123", true)]
+        [DataRow("123.33", true)]
+        [DataRow("33/33", false)]
+        [DataRow("234234d2", false)]
+
+        public async Task ShouldCheckIfItsOnlyNumbers(string input, bool expectedResult)
         {
             //Arrange
-            string input = "123";
-            string input2 = "123.33";
-            string input3 = "33/33";
-            string input4 = "234234d2";
 
             //Act
             bool result = await _exercise.CheckIfItsOnlyNumbers(input);
-            bool result2 = await _exercise.CheckIfItsOnlyNumbers(input2);
-            bool result3 = await _exercise.CheckIfItsOnlyNumbers(input3);
-            bool result4 = await _exercise.CheckIfItsOnlyNumbers(input4);
 
             //Assert
-            result.Should().BeTrue();
-            result2.Should().BeTrue();
-            result3.Should().BeFalse();
-            result4.Should().BeFalse();
+            result.Should().Be(expectedResult);
         }
 
         [TestMethod]
