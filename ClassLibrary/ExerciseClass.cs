@@ -602,7 +602,7 @@ namespace Basics.ClassLibrary
 
         public async Task<bool> SwapAndCheckTheLargest(int input)
         {
-            bool result = ((input % 10 * 10) + (input / 10)) > input ? true : false;
+            bool result = ((input % 10 * 10) + (input / 10)) > input;
 
             return result;
         }
