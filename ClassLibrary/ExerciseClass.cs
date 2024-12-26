@@ -626,7 +626,10 @@ namespace Basics.ClassLibrary
 
         public async Task<int[]> LowerCaseIndexer(string input)
         {
-            var result = input.Select((x, i) => i).Where(i => char.IsLower(input[i])).ToArray();
+            var result = input
+                .Select((x, i) => i)
+                .Where(i => char.IsLower(input[i]))
+                .ToArray();
             return result;
         }
 
