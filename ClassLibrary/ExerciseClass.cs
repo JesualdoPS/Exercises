@@ -509,14 +509,11 @@ namespace Basics.ClassLibrary
 
         public async Task<int> SpecificCharacterCounter(string input, char upperCase, char lowerCase)
         {
-            char[] charList = input.Substring(0, input.Length - 1).ToArray();
-            int result = 0;
-
-            foreach (var item in charList)
-            {
-                if (item == upperCase || item == lowerCase) result++;
-            }
-
+            var count = input
+                .Substring(0, input.Length - 1)
+                .Where(x => x == upperCase || x == lowerCase)
+                .Count();
+            
             return result;
         }
 
