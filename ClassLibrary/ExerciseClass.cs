@@ -383,14 +383,7 @@ namespace Basics.ClassLibrary
 
         public async Task<int> SumArray(int[] array)
         {
-            int result = 0;
-            int count = array.Length;
-
-            for (int i = 0; i < count; i++)
-            {
-                result += array[i];
-            }
-
+            var result = array.Sum();
             return result;
         }
 
