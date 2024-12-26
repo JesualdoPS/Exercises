@@ -472,7 +472,7 @@ namespace Basics.ClassLibrary
 
         public async Task<string> FileNameFinder(string filePath)
         {
-            string fileName = filePath.Split('\\').Last();
+            string fileName = Path.GetFileName(filePath);
 
             return fileName;
         }
