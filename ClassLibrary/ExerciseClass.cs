@@ -429,7 +429,7 @@ namespace Basics.ClassLibrary
             foreach (var romanNumber in romanNumbers)
             {
                 var romanCymbol = romanNumber.Value;
-                var decimalValue = romanNumber.Value;
+                var decimalValue = romanNumber.Key;
                 while (centuryRemainder >= decimalValue)
                 {
                     romanCymbols += romanCymbol;
@@ -441,12 +441,14 @@ namespace Basics.ClassLibrary
 
         public async Task<int> LargestProductToAdjacent(int[] array)
         {
+
             int product = 0;
             for (int i = 0; i < array.Length - 1; i++)
             {
-                if ((array[i] * array[i + 1]) > product) 
+                var foo = (array[i] * array[i + 1]);
+                if ( foo > product) 
                 {
-                    product = (array[i] * array[i + 1]);
+                    product = foo;
                 }
             }
 
