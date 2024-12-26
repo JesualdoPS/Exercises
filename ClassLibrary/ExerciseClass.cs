@@ -609,14 +609,12 @@ namespace Basics.ClassLibrary
 
         public async Task<string> NonLetterRemoval(string input)
         {
-            string result = "";
-            foreach (char c in input)
-            {
-                if (char.IsLetter(c))
-                {
-                    result += c;
-                }
-            }
+            var result = string.Join("", 
+                input
+                    .ToCharArray()
+                    .Where(x => char.IsLetter(x))
+            );
+
             return result;
         }
 
