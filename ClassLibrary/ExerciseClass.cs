@@ -777,11 +777,16 @@ namespace Basics.ClassLibrary
             return primeList.ToArray();
         }
 
-        public async Task<bool> IsSameTypeAndValue(object[] input)
+        public bool IsSameTypeAndValue(object[] input)
         {
-            bool isEqual = input[0].GetType().Equals(input[1].GetType());
+            var input1 = input[0];
+            var input2 = input[1];
+            var type1 = input1.GetType();
+            var type2 = input2.GetType();
 
-            return isEqual ? input[0].ToString() == input[1].ToString() : false;
+            var result = type1.Equals(type2) && input1.Equals(input2);
+            
+            return result;
         }
 
         public async Task<string> IdentityMatrixCreator(int input)
