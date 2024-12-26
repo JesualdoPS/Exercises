@@ -337,16 +337,10 @@ namespace Basics.ClassLibrary
 
         public async Task<string> FirstFourUpperCase(string input)
         {
-            string result = "";
-            if (input.Length <= 4)
-            {
-                return input.ToUpper();
-            }
-            else
-            {
-                result = input.Substring(0, 4).ToUpper() + input.Substring(4);
-                return result;
-            }
+            if (input.Length <= 4) return input.ToUpper();
+
+            var result = input.Substring(0, 4).ToUpper() + input.Substring(4);
+            return result;
         }
 
         public async Task<string> RemoveOddNumberedCharacters(string input)
