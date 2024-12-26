@@ -63,13 +63,12 @@ namespace Basics.ClassLibrary
         public async Task<string> NumbersInRows(string input)
         {
             var result = "";
-            for (int i = 1; i <= 2; i++)
-            {
-                result += string.Concat(Enumerable.Repeat(input + " ", 4)
-                    .ToArray()).Trim() + Environment.NewLine;
-                result += string.Concat(Enumerable.Repeat(input + "", 4)
-                    .ToArray()).Trim() + Environment.NewLine;
-            }
+           
+            result += string.Concat(Enumerable.Repeat(input + " ", 4)
+                .ToArray()).Trim() + Environment.NewLine;
+            result += string.Concat(Enumerable.Repeat(input + "", 4)
+                .ToArray()).Trim() + Environment.NewLine;
+            result += result;
             return result.Trim();
         }
 
