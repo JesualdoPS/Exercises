@@ -1,7 +1,6 @@
 using Basics.ClassLibrary;
 using FluentAssertions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Xunit.Sdk;
 
 namespace Basics.ExerciseTests
 {
