@@ -273,8 +273,8 @@ namespace Basics.ClassLibrary
             int length = input.Length;
             string subString = input.Substring(length - 4);
 
-            string result = string.Concat(Enumerable.Repeat(subString, 4));
-            return result.Trim();
+            string result = string.Concat(Enumerable.Repeat(subString, 4)).Trim();
+            return result;
         }
 
         public async Task<bool> CheckIfItsMultiple(double n1, double n2)
