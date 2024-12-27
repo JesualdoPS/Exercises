@@ -28,7 +28,7 @@ namespace BasicAlgorithm.BasicAlgorithmClass
 
         public string AddIf(string input)
         {
-            return (input.StartsWith("if") ? input : $"if {input}");
+            return input.StartsWith("if") ? input : $"if {input}";
         }
 
         public string RemoveAtPosition(string input, int position)
@@ -331,6 +331,160 @@ namespace BasicAlgorithm.BasicAlgorithmClass
         public bool HasTheSameDigit(int[] input)
         {
             return input.Any(x => input.Any(y => x != y && x.ToString().Intersect(y.ToString()).Any()));
+        }
+
+        public bool Is20Higher(int[] array)
+        {
+            return array.Max() - array.Min() >= 20;
+        }
+
+        public int LargestIntOrSameRemainderOrZero(int[] input)
+        {
+            if (input[0].Equals(input[1])) return 0;
+            return (input[0] % 7).Equals(input[1] % 7) ? input.Min() : input.Max();
+        }
+
+        public int HasSameLengthOnSum(int[] input)
+        {
+            int result = input.Sum();
+
+            return result.ToString().Length == input[0].ToString().Length
+                ? result
+                : input[0];
+        }
+
+        public int SumOrReturnThird(int[] input)
+        {
+            return input[0].Equals(input[1]) ? input[2] : input.Sum();
+        }
+
+        public int SumIgnoring13(int[] input)
+        {
+            int result = 0;
+            foreach (var item in input)
+            {
+                if (item == 13) break;
+                result += item;
+            }
+            return result;
+        }
+
+        public int SumIgnoringBetween10And13(int[] input)
+        {
+            return input.Where(x => x < 10 || x > 20 || x == 13 || x == 17).Sum();
+        }
+
+        public int IsNear17AndLesser(int[] input)
+        {
+            return input.All(x => x > 17) ? 0 : input.MinBy(x => Math.Abs(17 - x));
+        }
+
+        public bool HasSameDiference(int[] input)
+        {
+            return (input[2] - input[1]).Equals(input[1] - input[0]);
+        }
+
+        public string FormatS1S2S2S1(string[] array)
+        {
+            var s1 = array[0];
+            var s2 = array[1];
+
+            return string.Concat(s1, s2, s2, s1);
+        }
+
+        public string InsertString(string[] input)
+        {
+            int middle = input[0].Length / 2;
+
+            return $"{input[0].Substring(0, middle)}{input[1]}{input[0].Substring(middle)}";
+        }
+
+        public string CopyOfThreeLastCharacters(string input)
+        {
+            return (input.Length <= 3)
+                ? string.Concat(Enumerable.Repeat(input, 3))
+                : string.Concat(Enumerable.Repeat(input.Substring(input.Length - 2, 2), 3));
+        }
+
+        public string FirstTwoChars(string input)
+        {
+            return (input.Length <= 2) ? input : input.Substring(0, 2);
+        }
+
+        public string FirstHalfOfEvenLengthString(string input)
+        {
+            return input.Substring(0, Math.Abs(input.Length / 2));
+        }
+
+        public string RemoveFirstAndLastCharacter(string input)
+        {
+            return (input.Length <= 2) ? " " : input.Substring(1, input.Length - 2);
+        }
+
+        public string LongShortLongString(string[] input)
+        {
+            string longer = input.MaxBy(x => x.Length);
+            string shorter = input.MinBy(x => x.Length);
+
+            return $"{longer}{shorter}{longer}";
+        }
+
+        public string CombineStringsWithoutFirstChar(string[] input)
+        {
+            string newString1 = input[0].Substring(1);
+            string newString2 = input[1].Substring(1);
+            return $"{newString1}{newString2}";
+        }
+
+        public string MoveFirstTwoCharsToEnd(string input)
+        {
+            if (input.Length <= 2) return new string(input.Reverse().ToArray());
+
+            return input.Substring(2) + input.Substring(0, 2);
+        }
+
+        public string MoveLastTwoCharsToStart(string input)
+        {
+            if (input.Length <= 2) return input;
+
+            return input.Substring(input.Length - 2, 2) + input.Substring(0, input.Length - 2);
+        }
+
+        public string TwoMiddleChars(string input)
+        {
+            if (input.Length <= 2) return input;
+
+            int middle = input.Length % 2 == 0 ? input.Length / 2 : (input.Length - 1) / 2;
+
+            return input.Substring(middle - 1, 2);
+        }
+
+        public bool EndsWithOn(string input)
+        {
+            return input.Length < 2 ? false : input.Substring(input.Length - 2) == "on";
+        }
+
+        public string FirstAndLastNChars(string input, int n)
+        {
+            if (input.Length < 2) return $"{input}{input}";
+
+            return string.Concat(input.Substring(0, n) + input.Substring(input.Length - n));
+        }
+
+        public string ReturnStringWithStartingIndex(string input, int index)
+        {
+            if (input.Length <= 2) return input;
+
+            return input.Substring(index, 2);
+        }
+
+        public string ThreeCharsFromMiddleString(string input)
+        {
+            if (input.Length <= 3) return input;
+
+            int startingIndex = Math.Abs(input.Length / 2);
+
+            return input.Substring(startingIndex -1, 3);
         }
     }
 }
