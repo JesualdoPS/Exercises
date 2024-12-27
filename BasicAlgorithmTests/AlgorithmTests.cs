@@ -20,11 +20,8 @@ namespace BasicAlgorithm.BasicAlgorithmTests
         [DataRow(2, 2, 12)]
         public void ShouldSumIntegersFromArrayOrTripleIfItsEqual(int n1, int n2, int expectedResult)
         {
-            //Arrange
-            int[] input = { n1, n2 };
-
             //Act
-            int result = _exercise.SumOfNumbersInArray(input);
+            int result = _exercise.SumOfNumbersInArray(new[] { n1, n2 });
 
             //Assert
             result.Should().Be(expectedResult);
@@ -175,7 +172,6 @@ namespace BasicAlgorithm.BasicAlgorithmTests
             //Act
             bool result = _exercise.StartsWithCSharp(input);
 
-
             //Assert
             result.Should().Be(expectedResult);
         }
@@ -186,11 +182,8 @@ namespace BasicAlgorithm.BasicAlgorithmTests
         [DataRow(2, 120, false)]
         public void ShouldTemperatureBeLessThan0AndMoreThan100(int n1, int n2, bool expectedResult)
         {
-            //Arrange
-            int[] input = { n1, n2 };
-
             //Act
-            bool result = _exercise.CheckTemperatureLessThan0AndMoreThan100(input);
+            bool result = _exercise.CheckTemperatureLessThan0AndMoreThan100(new[] { n1, n2 });
 
             //Assert
             result.Should().Be(expectedResult);
@@ -202,11 +195,8 @@ namespace BasicAlgorithm.BasicAlgorithmTests
         [DataRow(105, 190, true)]
         public void ShouldCheckIfOneIntIsBetween100And200(int n1, int n2, bool expectedResult)
         {
-            //Arrange
-            int[] input = { n1, n2 };
-
             //Act
-            bool result = _exercise.IsBetween100And200(input);
+            bool result = _exercise.IsBetween100And200(new[] { n1, n2 });
 
             //Assert
             result.Should().Be(expectedResult);
@@ -219,11 +209,8 @@ namespace BasicAlgorithm.BasicAlgorithmTests
         [DataRow(15, 12, 8, false)]
         public void ShouldCheckIfItsInRange20To50(int n1, int n2, int n3, bool expectedResult)
         {
-            //Arrange
-            int[] input = { n1, n2, n3 };
-
             //Act
-            bool result = _exercise.IsInRange20To50(input);
+            bool result = _exercise.IsInRange20To50(new[] { n1, n2, n3 });
 
             //Assert
             result.Should().Be(expectedResult);
@@ -249,11 +236,8 @@ namespace BasicAlgorithm.BasicAlgorithmTests
         [DataRow(1, 2, 2, 2)]
         public void ShouldFindLargetsInt(int n1, int n2, int n3, int expectedResult)
         {
-            //Arrange
-            int[] input = { n1, n2, n3 };
-
             //Act
-            int result = _exercise.LargestInt(input);
+            int result = _exercise.LargestInt(new[] { n1, n2, n3 });
 
             //Assert
             result.Should().Be(expectedResult);
@@ -265,11 +249,8 @@ namespace BasicAlgorithm.BasicAlgorithmTests
         [DataRow(99, 70, 99)]
         public void ShouldShowClosestTo100(int n1, int n2, int expectedResult)
         {
-            //Arrange
-            int[] input = { n1, n2 };
-
             //Act
-            int result = _exercise.IsClosestTo100(input);
+            int result = _exercise.IsClosestTo100(new[] { n1, n2 });
 
             //Assert
             result.Should().Be(expectedResult);
@@ -282,11 +263,8 @@ namespace BasicAlgorithm.BasicAlgorithmTests
         [DataRow(55, 60, true)]
         public void ShouldCheckIfBothIntsAreBetween40And50And60(int n1, int n2, bool expectedResult)
         {
-            //Arrange
-            int[] input = { n1, n2 };
-
             //Act
-            bool result = _exercise.IsBetween40_50Or50_60(input);
+            bool result = _exercise.IsBetween40_50Or50_60(new[] { n1, n2 });
 
             //Assert
             result.Should().Be(expectedResult);
@@ -299,11 +277,8 @@ namespace BasicAlgorithm.BasicAlgorithmTests
         [DataRow(28, 28, 28)]
         public void ShouldFindLargestBetween20_30(int n1, int n2, int expectedResult)
         {
-            //Arrange
-            int[] input = { n1, n2 };
-
             //Act
-            int result = _exercise.IsLargestBetween20_30(input);
+            int result = _exercise.IsLargestBetween20_30(new[] { n1, n2 });
 
             //Assert
             result.Should().Be(expectedResult);
@@ -332,11 +307,8 @@ namespace BasicAlgorithm.BasicAlgorithmTests
         [DataRow(12, 45, false)]
         public void ShouldHaveSameLastDigit(int n1, int n2, bool expectedResult)
         {
-            //Arrange
-            int[] input = { n1, n2 };
-
             //Act
-            bool result = _exercise.HasSameLastDigit(input);
+            bool result = _exercise.HasSameLastDigit(new[] { n1, n2 });
 
             //Assert
             result.Should().Be(expectedResult);
@@ -459,11 +431,8 @@ namespace BasicAlgorithm.BasicAlgorithmTests
         [DataRow(1, 2, 2, 3, 9, false)]
         public void ShouldCheckIfElementIsPresentInArray(int n1, int n2, int n3, int n4, int input, bool expectedResult)
         {
-            //Arrange
-            int[] array = { n1, n2, n3, n4 };
-
             //Act
-            bool result = _exercise.HasTheElement(array, input);
+            bool result = _exercise.HasTheElement(new[] { n1, n2, n3, n4 }, input);
 
             //Assert
             result.Should().Be(expectedResult);
@@ -509,11 +478,8 @@ namespace BasicAlgorithm.BasicAlgorithmTests
         [DataRow(1, 2, 1, 2, 3, true)]
         public void ShouldCheckIfHasTheSequence123(int n1, int n2, int n3, int n4, int n5, bool expectedResult)
         {
-            //Arrange
-            int[] array = { n1, n2, n3, n4, n5 };
-
             //Act
-            bool result = _exercise.HasSequence123(array);
+            bool result = _exercise.HasSequence123(new[] { n1, n2, n3, n4, n5 });
 
             //Assert
             result.Should().Be(expectedResult);
@@ -525,11 +491,8 @@ namespace BasicAlgorithm.BasicAlgorithmTests
         [DataRow("pqrstuvwx", "pqkdiewx", 2)]
         public void ShouldCountMatchingSubstringsInStrings(string str1, string str2, int expectedResult)
         {
-            //Arrange
-            string[] array = { str1, str2 };
-
             //Assert
-            int result = _exercise.SubstringMatchingCount(array);
+            int result = _exercise.SubstringMatchingCount(new[] { str1, str2 });
 
             //Assert
             result.Should().Be(expectedResult);
@@ -616,11 +579,8 @@ namespace BasicAlgorithm.BasicAlgorithmTests
         [DataRow(20, 0, 30)]
         public void ShouldSumOrReturn30(int n1, int n2, int expectedResult)
         {
-            //Arrange
-            int[] array = { n1, n2 };
-
             //Act
-            int result = _exercise.SumOrReturn30(array);
+            int result = _exercise.SumOrReturn30(new[] { n1, n2 });
 
             //Assert
             result.Should().Be(expectedResult);
@@ -633,11 +593,8 @@ namespace BasicAlgorithm.BasicAlgorithmTests
         [DataRow(15, 10, true)]
         public void ShouldFind5OrSumOrDifference5(int n1, int n2, bool expectedResult)
         {
-            //Arrange
-            int[] input = { n1, n2 };
-
             //Act
-            bool result = _exercise.HasA5Value(input);
+            bool result = _exercise.HasA5Value(new[] { n1, n2 });
 
             //Assert
             result.Should().Be(expectedResult);
@@ -691,11 +648,8 @@ namespace BasicAlgorithm.BasicAlgorithmTests
         [DataRow(21, 220, 241)]
         public void ShouldReturn18IfOneValueIsBetween10And20(int n1, int n2, int expectedResult)
         {
-            //Arrange
-            int[] input = { n1, n2 };
-
             //Act
-            int result = _exercise.SumOrReturn18(input);
+            int result = _exercise.SumOrReturn18(new[] { n1, n2 });
 
             //Assert
             result.Should().Be(expectedResult);
@@ -707,11 +661,8 @@ namespace BasicAlgorithm.BasicAlgorithmTests
         [DataRow(-1, 1, 0, true)]
         public void ShouldThirdBeSumOfOtherTwo(int n1, int n2, int n3, bool expectedResult)
         {
-            //Arrange
-            int[] array = { n1, n2, n3 };
-
             //Act
-            bool result = _exercise.IsThirdSumOfOtherTwo(array);
+            bool result = _exercise.IsThirdSumOfOtherTwo(new[] { n1, n2, n3 });
 
             //Assert
             result.Should().Be(expectedResult);
@@ -723,11 +674,8 @@ namespace BasicAlgorithm.BasicAlgorithmTests
         [DataRow(-1, 1, 0, false)]
         public void ShouldBeNumericOrder(int n1, int n2, int n3, bool expectedResult)
         {
-            //Arrange
-            int[] array = { n1, n2, n3 };
-
             //Act
-            bool result = _exercise.IsAscendingOrder(array);
+            bool result = _exercise.IsAscendingOrder(new[] { n1, n2, n3 });
 
             //Assert
             result.Should().Be(expectedResult);
@@ -739,11 +687,8 @@ namespace BasicAlgorithm.BasicAlgorithmTests
         [DataRow(11, 22, 33, false)]
         public void ShouldHaveSameDigit(int n1, int n2, int n3, bool expectedResult)
         {
-            //Arrange
-            int[] input = { n1, n2, n3 };
-
             //Act
-            bool result = _exercise.HasTheSameDigit(input);
+            bool result = _exercise.HasTheSameDigit(new[] { n1, n2, n3 });
 
             //Assert
             result.Should().Be(expectedResult);
@@ -755,11 +700,8 @@ namespace BasicAlgorithm.BasicAlgorithmTests
         [DataRow(10, 20, 15, false)]
         public void ShouldCheckIfOneIntIs20HigherThanAnother(int n1, int n2, int n3, bool expectedResult)
         {
-            //Arrange
-            int[] array = { n1, n2, n3 };
-
             //Act
-            bool result = _exercise.Is20Higher(array);
+            bool result = _exercise.Is20Higher(new[] { n1, n2, n3 });
 
             //Assert
             result.Should().Be(expectedResult);
@@ -772,11 +714,8 @@ namespace BasicAlgorithm.BasicAlgorithmTests
         [DataRow(15, 29, 15)]
         public void ShouldFindTheLargestOrIfHasSameRemainderOrReturnZero(int n1, int n2, int expectedResult)
         {
-            //Arrange
-            int[] input = { n1, n2 };
-
             //Act
-            int result = _exercise.LargestIntOrSameRemainderOrZero(input);
+            int result = _exercise.LargestIntOrSameRemainderOrZero(new[] { n1, n2 });
 
             //Assert
             result.Should().Be(expectedResult);
@@ -788,11 +727,8 @@ namespace BasicAlgorithm.BasicAlgorithmTests
         [DataRow(10, 10, 20)]
         public void ShouldHaveSameSumLength(int n1, int n2, int expectedResult)
         {
-            //Arrange
-            int[] input = { n1, n2 };
-
             //Act
-            int result = _exercise.HasSameLengthOnSum(input);
+            int result = _exercise.HasSameLengthOnSum(new[] { n1, n2 });
 
             //Assert
             result.Should().Be(expectedResult);
@@ -805,11 +741,8 @@ namespace BasicAlgorithm.BasicAlgorithmTests
         [DataRow(12, 12, 18, 18)]
         public void ShouldSumThreeIntOrReturnThirdIfTwoAreEqual(int n1, int n2, int n3, int expectedResult)
         {
-            //Arrange
-            int[] input = { n1, n2, n3 };
-
             //Act
-            int result = _exercise.SumOrReturnThird(input);
+            int result = _exercise.SumOrReturnThird(new[] { n1, n2, n3 });
 
             //Assert
             result.Should().Be(expectedResult);
@@ -822,11 +755,8 @@ namespace BasicAlgorithm.BasicAlgorithmTests
         [DataRow(13, 12, 18, 0)]
         public void ShouldIgnore13AndRightToIt(int n1, int n2, int n3, int expectedResult)
         {
-            //Arrange
-            int[] input = { n1, n2, n3 };
-
             //Act
-            int result = _exercise.SumIgnoring13(input);
+            int result = _exercise.SumIgnoring13(new[] { n1, n2, n3 });
 
             //Assert
             result.Should().Be(expectedResult);
@@ -839,11 +769,8 @@ namespace BasicAlgorithm.BasicAlgorithmTests
         [DataRow(14, 15, 16, 0)]
         public void ShouldSumNumbersBeneath10AndAbove20Except13And17(int n1, int n2, int n3, int expectedResult)
         {
-            //Arrange
-            int[] input = { n1, n2, n3 };
-
             //Act
-            int result = _exercise.SumIgnoringBetween10And13(input);
+            int result = _exercise.SumIgnoringBetween10And13(new[] { n1, n2, n3 });
 
             //Assert
             result.Should().Be(expectedResult);
@@ -856,11 +783,8 @@ namespace BasicAlgorithm.BasicAlgorithmTests
         [DataRow(21, 37, 0)]
         public void ShouldReturnTheNearestNumberTo17WithoutCrossing(int n1, int n2, int expectedResult)
         {
-            //Arrange
-            int[] input = { n1, n2 };
-
             //Act
-            int result = _exercise.IsNear17AndLesser(input);
+            int result = _exercise.IsNear17AndLesser(new[] { n1, n2 });
 
             //Assert
             result.Should().Be(expectedResult);
@@ -872,11 +796,8 @@ namespace BasicAlgorithm.BasicAlgorithmTests
         [DataRow(-1, 0, 1, true)]
         public void ShouldHaveSameDifference(int n1, int n2, int n3, bool expectedResult)
         {
-            //Arrange
-            int[] input = { n1, n2, n3 };
-
             //Act
-            bool result = _exercise.HasSameDiference(input);
+            bool result = _exercise.HasSameDiference(new[] { n1, n2, n3 });
 
             //Assert
             result.Should().Be(expectedResult);
@@ -887,11 +808,8 @@ namespace BasicAlgorithm.BasicAlgorithmTests
         [DataRow("whats", "app", "whatsappappwhats")]
         public void ShouldFormatToS1S2S2S1(string str1, string str2, string expectedResult)
         {
-            //Arrange
-            string[] array = { str1, str2 };
-
             //Act
-            string result = _exercise.FormatS1S2S2S1(array);
+            string result = _exercise.FormatS1S2S2S1(new[] { str1, str2 });
 
             //Assert
             result.Should().Be(expectedResult);
@@ -902,11 +820,8 @@ namespace BasicAlgorithm.BasicAlgorithmTests
         [DataRow("(())", "Hi", "((Hi))")]
         public void ShouldInsertStringInsideAnother(string str1, string str2, string expectedResult)
         {
-            //Arrange
-            string[] input = { str1, str2 };
-
             //Act
-            string result = _exercise.InsertString(input);
+            string result = _exercise.InsertString(new[] { str1, str2 });
 
             //Assert
             result.Should().Be(expectedResult);
@@ -968,11 +883,8 @@ namespace BasicAlgorithm.BasicAlgorithmTests
         [DataRow("JS", "Python", "PythonJSPython")]
         public void ShouldOrderByLongShortLongString(string str1, string str2, string expectedResult)
         {
-            //Arrange
-            string[] input = { str1, str2 };
-
             //Act
-            string result = _exercise.LongShortLongString(input);
+            string result = _exercise.LongShortLongString(new[] { str1, str2 });
 
             //Assert
             result.Should().Be(expectedResult);
@@ -983,11 +895,8 @@ namespace BasicAlgorithm.BasicAlgorithmTests
         [DataRow("JS", "Python", "Sython")]
         public void ShouldCombineStringsAfterRemovingFirstCharacter(string str1, string str2, string expectedResult)
         {
-            //Arrange
-            string[] input = { str1, str2 };
-
             //Act
-            string result = _exercise.CombineStringsWithoutFirstChar(input);
+            string result = _exercise.CombineStringsWithoutFirstChar(new[] { str1, str2 });
 
             //Assert
             result.Should().Be(expectedResult);
