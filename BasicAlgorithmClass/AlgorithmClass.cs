@@ -5,7 +5,7 @@ namespace BasicAlgorithm.BasicAlgorithmClass
 {
     public class AlgorithmClass
     {
-        public int SumOfNumbersInArray(int[] input)
+        public int SumOfNumbersInArrayOrTrupleIfEqual(int[] input)
         {
             int result = (input[0] == input[1]) ? input.Sum() * 3 : input.Take(2).Sum();
             return result;
@@ -484,7 +484,157 @@ namespace BasicAlgorithm.BasicAlgorithmClass
 
             int startingIndex = Math.Abs(input.Length / 2);
 
-            return input.Substring(startingIndex -1, 3);
+            return input.Substring(startingIndex - 1, 3);
+        }
+
+        public string FirstTwoCharsOrMissing(string input)
+        {
+            if (input.Length >= 2) return input.Substring(0, 2);
+
+            return input.Length == 0 ? "##" : input + "#";
+        }
+
+        public string FirstAndLastCharOfTwoStrings(string[] strings)
+        {
+            return string.Concat(strings[0].Length == 0 ? "#" : strings[0].Substring(0, 1),
+                strings[1].Length == 0 ? "#" : strings[1].Substring(strings[1].Length - 1, 1));
+        }
+
+        public string ConcatStringRemovingLastDuplicate(string str1, string str2)
+        {
+            return (str1.Last() == str2.First())
+                ? string.Concat(str1.Substring(0), str2.Substring(1))
+                : str1 + str2;
+        }
+
+        public string SwapLastTwoChars(string input)
+        {
+            if (input.Length < 2) return input;
+
+            char[] chars = input.ToCharArray();
+            (chars[^2], chars[^1]) = (chars[^1], chars[^2]);
+
+            return new string(chars);
+        }
+
+        public string BeginsWith(string input)
+        {
+            string lower = input.ToLower();
+            if (!lower.StartsWith("abc") && !lower.StartsWith("xyz")) return string.Empty;
+
+            return lower.StartsWith("abc") ? "abc" : "xyz";
+        }
+
+        public bool IsBeginEqualsLast(string input)
+        {
+            return input.Substring(0, 2) == input.Substring(input.Length - 2);
+        }
+
+        public string EqualizeAndCombine(string str1, string str2)
+        {
+            int minLength = Math.Min(str1.Length, str2.Length);
+            return str1.Substring(0, minLength) + str2.Substring(str2.Length - minLength);
+        }
+
+        public string RemoveFirstTwo(string input)
+        {
+            if (input.Substring(0, 2) != input.Substring(input.Length - 2)) return input;
+
+            return input.Substring(2);
+        }
+
+        public string RemoveFirstTwoIfItsNotPOrY(string input)
+        {
+            if (input[1] != 'y') input = input.Remove(1, 1);
+            if (char.ToLower(input[0]) != 'p') input = input.Remove(0, 1);
+
+            return input;
+        }
+
+        public string ARemover(string input)
+        {
+            if (!input.StartsWith("a") && !input.EndsWith("a")) return input;
+
+            if (char.ToLower(input[0]) == 'a') input = input.Remove(0, 1);
+
+            if (input[^1] == 'a') input = input.Remove(input.Length - 1, 1);
+
+            return input;
+        }
+
+        public string RemoveAFromFirstTwo(string input)
+        {
+            if (input.ToLower().StartsWith("aa")) return input.Substring(2);
+
+            if (input[1] == 'a') input = input.Remove(1, 1);
+            if (char.ToLower(input[0]) == 'a') input = input.Remove(0, 1);
+
+            return input;
+        }
+
+        public bool Has10OnStartOrEnd(int[] input)
+        {
+            return input[0] == 10 || input[^1] == 10;
+        }
+
+        public bool Is10FirstOrLast(int[] input)
+        {
+            return input[0] == input[^1];
+        }
+
+        public bool IsFirstOrLastEqual(int[] input, int[] input2)
+        {
+            return input[0] == input2[0] || input[^1] == input2[^1];
+        }
+
+        public int SumOfNumbersInArray(int[] input)
+        {
+            return input.Sum();
+        }
+
+        public int[] RotateLeft(int[] input)
+        {
+            return input.Skip(1).Concat(new[] { input[0] }).ToArray();
+        }
+
+        public int[] ReverseArray(int[] input)
+        {
+            return input.Reverse().ToArray();
+        }
+
+        public int[] ReplaceAllForMax(int[] input)
+        {
+            int maxValue = input.Max();
+
+            return Enumerable.Repeat(maxValue, input.Length).ToArray();
+        }
+
+        public int[] MiddleElements(int[] input, int[] input2)
+        {
+            return new int[] { input[2], input2[2] };
+        }
+
+        public int[] FirstAndLastElement(int[] input)
+        {
+            return new int[] { input[0], input[^1] };
+        }
+
+        public bool Has15Or20(int[] input)
+        {
+            return input.Contains(15) || input.Contains(20);
+        }
+
+        public int[] FirstIntAndZeroToDoubleSizedArray(int[] input)
+        {
+            int[] result = new int[input.Length * 2];
+            result[0] = input[0];
+
+            return result;
+        }
+
+        public bool AreEqual10Or20(int[] input)
+        {
+            return input.All(x => x == 10) || input.All(x => x == 20);
         }
     }
 }

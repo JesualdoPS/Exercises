@@ -21,7 +21,7 @@ namespace BasicAlgorithm.BasicAlgorithmTests
         public void ShouldSumIntegersFromArrayOrTripleIfItsEqual(int n1, int n2, int expectedResult)
         {
             //Act
-            int result = _exercise.SumOfNumbersInArray(new[] { n1, n2 });
+            int result = _exercise.SumOfNumbersInArrayOrTrupleIfEqual(new[] { n1, n2 });
 
             //Assert
             result.Should().Be(expectedResult);
@@ -987,6 +987,344 @@ namespace BasicAlgorithm.BasicAlgorithmTests
         {
             //Act
             string result = _exercise.ThreeCharsFromMiddleString(input);
+
+            //Assert
+            result.Should().Be(expectedResult);
+        }
+
+        [TestMethod]
+        [DataRow("Hello", "He")]
+        [DataRow("Python", "Py")]
+        [DataRow("a", "a#")]
+        [DataRow("", "##")]
+        public void ShouldReturnFirstTwoCharactersOrReplaceTheMissing(string input, string expectedResult)
+        {
+            //Act
+            string result = _exercise.FirstTwoCharsOrMissing(input);
+
+            //Assert
+            result.Should().Be(expectedResult);
+        }
+
+        [TestMethod]
+        [DataRow("Hello", "Hi", "Hi")]
+        [DataRow("Python", "PHP", "PP")]
+        [DataRow("JS", "JS", "JS")]
+        [DataRow("Csharp", "", "C#")]
+        [DataRow("", "IA", "#A")]
+        public void ShouldReturnFirstAndLastCharOfTwoStrings(string str1, string str2, string expectedResult)
+        {
+            //Act
+            string result = _exercise.FirstAndLastCharOfTwoStrings(new[] { str1, str2 });
+
+            //Assert
+            result.Should().Be(expectedResult);
+        }
+
+        [TestMethod]
+        [DataRow("abc", "cat", "abcat")]
+        [DataRow("python", "php", "pythonphp")]
+        [DataRow("php", "php", "phphp")]
+        public void ShouldConcatenateStringsRemovingLastCharIfDuplicated(string str1, string str2, string expectedResult)
+        {
+            //Act
+            string result = _exercise.ConcatStringRemovingLastDuplicate(str1, str2);
+
+            //Assert
+            result.Should().Be(expectedResult);
+        }
+
+        [TestMethod]
+        [DataRow("Hello", "Helol")]
+        [DataRow("Python", "Pythno")]
+        [DataRow("PHP", "PPH")]
+        [DataRow("JS", "SJ")]
+        [DataRow("C", "C")]
+        public void ShouldSwapLastTwoChars(string input, string expectedResult)
+        {
+            //Act
+            string result = _exercise.SwapLastTwoChars(input);
+
+            //Assert
+            result.Should().Be(expectedResult);
+        }
+
+        [TestMethod]
+        [DataRow("abc", "abc")]
+        [DataRow("abcdef", "abc")]
+        [DataRow("C", "")]
+        [DataRow("xyz", "xyz")]
+        [DataRow("abc", "abc")]
+        [DataRow("ABC", "abc")]
+        public void ShouldReturnIfBegginsWithABCOrXYZ(string input, string expectedResult)
+        {
+            //Act
+            string result = _exercise.BeginsWith(input);
+
+            //Assert
+            result.Should().Be(expectedResult);
+        }
+
+        [TestMethod]
+        [DataRow("abab", true)]
+        [DataRow("abcdef", false)]
+        [DataRow("xyzsderxy", true)]
+        public void ShouldCheckIfFirstTwoAndLastTwoAreEqual(string input, bool expectedResult)
+        {
+            //Act
+            bool result = _exercise.IsBeginEqualsLast(input);
+
+            //Assert
+            result.Should().Be(expectedResult);
+        }
+
+        [TestMethod]
+        [DataRow("abc", "abcd", "abcbcd")]
+        [DataRow("Python", "Python", "PythonPython")]
+        [DataRow("JS", "Python", "JSon")]
+        [DataRow("Python", "JS", "PyJS")]
+        public void ShouldJoinTwoStringsAfterReducingLength(string str1, string str2, string expectedResult)
+        {
+            //Act
+            string result = _exercise.EqualizeAndCombine(str1, str2);
+
+            //Assert
+            result.Should().Be(expectedResult);
+        }
+
+        [TestMethod]
+        [DataRow("abcab", "cab")]
+        [DataRow("Python", "Python")]
+        public void ShouldRemoveFirstTwoIfItsEqualToLastTwo(string input, string expectedResult)
+        {
+            //Act
+            string result = _exercise.RemoveFirstTwo(input);
+
+            //Assert
+            result.Should().Be(expectedResult);
+        }
+
+        [TestMethod]
+        [DataRow("abcab", "cab")]
+        [DataRow("Python", "Python")]
+        [DataRow("press", "pess")]
+        [DataRow("jython", "ython")]
+        public void ShouldRemoveFirstTwoCharactersIfItsNotPOrY(string input, string expectedResult)
+        {
+            //Act
+            string result = _exercise.RemoveFirstTwoIfItsNotPOrY(input);
+
+            //Assert
+            result.Should().Be(expectedResult);
+        }
+
+        [TestMethod]
+        [DataRow("abcab", "bcab")]
+        [DataRow("python", "python")]
+        [DataRow("abcda", "bcd")]
+        [DataRow("jython", "jython")]
+        public void ShouldRemoveAFromBegginingAndFromTheEnd(string input, string expectedResult)
+        {
+            //Act
+            string result = _exercise.ARemover(input);
+
+            //Assert
+            result.Should().Be(expectedResult);
+        }
+
+        [TestMethod]
+        [DataRow("abcab", "bcab")]
+        [DataRow("python", "python")]
+        [DataRow("aacda", "cda")]
+        [DataRow("calculator", "clculator")]
+        public void ShouldRemoveTheAFromFirstTwoChars(string input, string expectedResult)
+        {
+            //Act
+            string result = _exercise.RemoveAFromFirstTwo(input);
+
+            //Assert
+            result.Should().Be(expectedResult);
+        }
+
+        [TestMethod]
+        [DataRow(10, 20, 40, 50, true)]
+        [DataRow(5, 20, 40, 10, true)]
+        [DataRow(10, 20, 40, 10, true)]
+        [DataRow(12, 24, 35, 55, false)]
+        public void ShouldCheckIfFirstOrLastIs10(int n1, int n2, int n3, int n4, bool expectedResult)
+        {
+            //Arrange
+            int[] input = { n1, n2, n3, n4 };
+
+            //Act
+            bool result = _exercise.Has10OnStartOrEnd(input);
+
+            //Assert
+            result.Should().Be(expectedResult);
+        }
+
+        [TestMethod]
+        [DataRow(10, 20, 40, 50, false)]
+        [DataRow(10, 20, 40, 10, true)]
+        [DataRow(12, 24, 35, 55, false)]
+        public void ShouldCheckIfFirstAndLastAreEqual(int n1, int n2, int n3, int n4, bool expectedResult)
+        {
+            //Arrange
+            int[] input = { n1, n2, n3, n4 };
+
+            //Act
+            bool result = _exercise.Is10FirstOrLast(input);
+
+            //Assert
+            result.Should().Be(expectedResult);
+        }
+
+        [TestMethod]
+        [DataRow(10, 20, 40, 50, 10, 20, 40, 50, true)]
+        [DataRow(10, 20, 40, 50, 10, 20, 40, 5, true)]
+        [DataRow(10, 20, 40, 50, 1, 20, 40, 50, true)]
+        [DataRow(10, 20, 40, 50, 11, 25, 41, 55, false)]
+        public void ShouldCheckIfFirstOfLastAreEqual(int n1, int n2, int n3, int n4, int n5, int n6, int n7, int n8, bool expectedResult)
+        {
+            //Arrange
+            int[] input = { n1, n2, n3, n4 };
+            int[] input2 = { n5, n6, n7, n8 };
+
+            //Act
+            bool result = _exercise.IsFirstOrLastEqual(input, input2);
+
+            //Assert
+            result.Should().Be(expectedResult);
+        }
+
+        [TestMethod]
+        [DataRow(10, 20, 30, 40, 50, 150)]
+        [DataRow(10, 20, -30, -40, 50, 10)]
+        public void ShouldSumAllVallues(int n1, int n2, int n3, int n4, int n5, int expectedResult)
+        {
+            //Arrange
+            int[] input = { n1, n2, n3, n4, n5 };
+
+            //Act
+            int result = _exercise.SumOfNumbersInArray(input);
+
+            //Assert
+            result.Should().Be(expectedResult);
+        }
+
+        [TestMethod]
+        [DataRow(10, 20, -30, -40, 20, -30, -40, 10)]
+        public void ShouldRotateToLeft(int n1, int n2, int n3, int n4, int n5, int n6, int n7, int n8)
+        {
+            //Arrange
+            int[] input = { n1, n2, n3, n4 };
+
+            //Act
+            int[] result = _exercise.RotateLeft(input);
+
+            //Assert
+            result.Should().BeEquivalentTo(new[] { n5, n6, n7, n8 });
+        }
+
+        [TestMethod]
+        [DataRow(10, 20, -30, -40, 50, 50, -40, -30, 20, 10)]
+        public void ShouldReverseAnArray(int n1, int n2, int n3, int n4, int n5, int n6, int n7, int n8, int n9, int n10)
+        {
+            //Arrange
+            int[] input = { n1, n2, n3, n4, n5 };
+
+            //Act
+            int[] result = _exercise.ReverseArray(input);
+
+            //Assert
+            result.Should().BeEquivalentTo(new[] { n6, n7, n8, n9, n10 });
+        }
+
+        [TestMethod]
+        [DataRow(10, 20, -30, -40, 20)]
+        public void ShouldReplaceAllElementsInArrayByItsMax(int n1, int n2, int n3, int n4, int n5)
+        {
+            //Arrange
+            int[] input = { n1, n2, n3, n4 };
+
+            //Act
+            int[] result = _exercise.ReplaceAllForMax(input);
+
+            //Assert
+            result.Should().BeEquivalentTo(new[] { n5, n5, n5, n5 });
+        }
+
+        [TestMethod]
+        [DataRow(10, 20, -30, -40, 30, 10, 20, 30, 40, 30)]
+        public void ShouldReturnTheMiddleElementsOfTwoArrays(int n1, int n2, int n3, int n4, int n5, int n6, int n7, int n8, int n9, int n10)
+        {
+            //Arrange
+            int[] input = { n1, n2, n3, n4, n5 };
+            int[] input2 = { n6, n7, n8, n9, n10 };
+
+            //Act
+            int[] result = _exercise.MiddleElements(input, input2);
+
+            //Assert
+            result.Should().BeEquivalentTo(new[] { n3, n8 });
+        }
+
+        [TestMethod]
+        [DataRow(10, 20, -30, -40, 30)]
+        public void ShouldReturnFirstAndLastElementOfArray(int n1, int n2, int n3, int n4, int n5)
+        {
+            //Arrange
+            int[] input = { n1, n2, n3, n4, n5 };
+
+            //Act
+            int[] result = _exercise.FirstAndLastElement(input);
+
+            //Assert
+            result.Should().BeEquivalentTo(new[] { n1, n5 });
+        }
+
+        [TestMethod]
+        [DataRow(12, 20, true)]
+        [DataRow(14, 15, true)]
+        [DataRow(11, 21, false)]
+        public void ShouldCheckIfHas15Or20OnArray(int n1, int n2, bool expectedResult)
+        {
+            //Arrange
+            int[] input = { n1, n2 };
+
+            //Act
+            bool result = _exercise.Has15Or20(input);
+
+            //Assert
+            result.Should().Be(expectedResult);
+        }
+
+        [TestMethod]
+        [DataRow(10, 20, -30, -40, 30)]
+        public void ShouldCheckIfHasNot15Or20OnArray(int n1, int n2, int n3, int n4, int n5)
+        {
+            //Arrange
+            int[] input = { n1, n2, n3, n4, n5 };
+
+            //Act
+            int[] result = _exercise.FirstIntAndZeroToDoubleSizedArray(input);
+
+            //Assert
+            result.Should().BeEquivalentTo(new[] { 10, 0, 0, 0, 0, 0, 0, 0, 0, 0});
+        }
+
+        [TestMethod]
+        [DataRow(12,20,false)]
+        [DataRow(20,20,true)]
+        [DataRow(10,10,true)]
+        [DataRow(10,17,false)]
+        public void ShouldHaveBothValuesEqual10Or20(int n1, int n2, bool expectedResult)
+        {
+            //Arrange
+            int[] input = { n1, n2 };
+
+            //Act
+            bool result = _exercise.AreEqual10Or20(input);
 
             //Assert
             result.Should().Be(expectedResult);
