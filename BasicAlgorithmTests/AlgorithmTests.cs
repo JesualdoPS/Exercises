@@ -1153,11 +1153,8 @@ namespace BasicAlgorithm.BasicAlgorithmTests
         [DataRow(12, 24, 35, 55, false)]
         public void ShouldCheckIfFirstOrLastIs10(int n1, int n2, int n3, int n4, bool expectedResult)
         {
-            //Arrange
-            int[] input = { n1, n2, n3, n4 };
-
             //Act
-            bool result = _exercise.Has10OnStartOrEnd(input);
+            bool result = _exercise.Has10OnStartOrEnd(new[] { n1, n2, n3, n4 });
 
             //Assert
             result.Should().Be(expectedResult);
@@ -1169,11 +1166,8 @@ namespace BasicAlgorithm.BasicAlgorithmTests
         [DataRow(12, 24, 35, 55, false)]
         public void ShouldCheckIfFirstAndLastAreEqual(int n1, int n2, int n3, int n4, bool expectedResult)
         {
-            //Arrange
-            int[] input = { n1, n2, n3, n4 };
-
             //Act
-            bool result = _exercise.Is10FirstOrLast(input);
+            bool result = _exercise.Is10FirstOrLast(new[] { n1, n2, n3, n4 });
 
             //Assert
             result.Should().Be(expectedResult);
@@ -1186,12 +1180,8 @@ namespace BasicAlgorithm.BasicAlgorithmTests
         [DataRow(10, 20, 40, 50, 11, 25, 41, 55, false)]
         public void ShouldCheckIfFirstOfLastAreEqual(int n1, int n2, int n3, int n4, int n5, int n6, int n7, int n8, bool expectedResult)
         {
-            //Arrange
-            int[] input = { n1, n2, n3, n4 };
-            int[] input2 = { n5, n6, n7, n8 };
-
             //Act
-            bool result = _exercise.IsFirstOrLastEqual(input, input2);
+            bool result = _exercise.IsFirstOrLastEqual(new[] { n1, n2, n3, n4 }, new[] { n5, n6, n7, n8 });
 
             //Assert
             result.Should().Be(expectedResult);
@@ -1202,11 +1192,8 @@ namespace BasicAlgorithm.BasicAlgorithmTests
         [DataRow(10, 20, -30, -40, 50, 10)]
         public void ShouldSumAllVallues(int n1, int n2, int n3, int n4, int n5, int expectedResult)
         {
-            //Arrange
-            int[] input = { n1, n2, n3, n4, n5 };
-
             //Act
-            int result = _exercise.SumOfNumbersInArray(input);
+            int result = _exercise.SumOfNumbersInArray(new[] { n1, n2, n3, n4, n5 });
 
             //Assert
             result.Should().Be(expectedResult);
@@ -1216,71 +1203,55 @@ namespace BasicAlgorithm.BasicAlgorithmTests
         [DataRow(10, 20, -30, -40, 20, -30, -40, 10)]
         public void ShouldRotateToLeft(int n1, int n2, int n3, int n4, int n5, int n6, int n7, int n8)
         {
-            //Arrange
-            int[] input = { n1, n2, n3, n4 };
-
             //Act
-            int[] result = _exercise.RotateLeft(input);
+            int[] result = _exercise.RotateLeft(new[] { n1, n2, n3, n4 });
 
             //Assert
-            result.Should().BeEquivalentTo(new[] { n5, n6, n7, n8 });
+            result.Should().Equal(new[] { n5, n6, n7, n8 });
         }
 
         [TestMethod]
         [DataRow(10, 20, -30, -40, 50, 50, -40, -30, 20, 10)]
         public void ShouldReverseAnArray(int n1, int n2, int n3, int n4, int n5, int n6, int n7, int n8, int n9, int n10)
         {
-            //Arrange
-            int[] input = { n1, n2, n3, n4, n5 };
-
             //Act
-            int[] result = _exercise.ReverseArray(input);
+            int[] result = _exercise.ReverseArray(new[] { n1, n2, n3, n4, n5 });
 
             //Assert
-            result.Should().BeEquivalentTo(new[] { n6, n7, n8, n9, n10 });
+            result.Should().Equal(new[] { n6, n7, n8, n9, n10 });
         }
 
         [TestMethod]
         [DataRow(10, 20, -30, -40, 20)]
         public void ShouldReplaceAllElementsInArrayByItsMax(int n1, int n2, int n3, int n4, int n5)
         {
-            //Arrange
-            int[] input = { n1, n2, n3, n4 };
-
             //Act
-            int[] result = _exercise.ReplaceAllForMax(input);
+            int[] result = _exercise.ReplaceAllForMax(new[] { n1, n2, n3, n4 });
 
             //Assert
-            result.Should().BeEquivalentTo(new[] { n5, n5, n5, n5 });
+            result.Should().Equal(new[] { n5, n5, n5, n5 });
         }
 
         [TestMethod]
         [DataRow(10, 20, -30, -40, 30, 10, 20, 30, 40, 30)]
         public void ShouldReturnTheMiddleElementsOfTwoArrays(int n1, int n2, int n3, int n4, int n5, int n6, int n7, int n8, int n9, int n10)
         {
-            //Arrange
-            int[] input = { n1, n2, n3, n4, n5 };
-            int[] input2 = { n6, n7, n8, n9, n10 };
-
             //Act
-            int[] result = _exercise.MiddleElements(input, input2);
+            int[] result = _exercise.MiddleElements(new[] { n1, n2, n3, n4, n5 }, new[] { n6, n7, n8, n9, n10 });
 
             //Assert
-            result.Should().BeEquivalentTo(new[] { n3, n8 });
+            result.Should().Equal(new[] { n3, n8 });
         }
 
         [TestMethod]
         [DataRow(10, 20, -30, -40, 30)]
         public void ShouldReturnFirstAndLastElementOfArray(int n1, int n2, int n3, int n4, int n5)
         {
-            //Arrange
-            int[] input = { n1, n2, n3, n4, n5 };
-
             //Act
-            int[] result = _exercise.FirstAndLastElement(input);
+            int[] result = _exercise.FirstAndLastElement(new[] { n1, n2, n3, n4, n5 });
 
             //Assert
-            result.Should().BeEquivalentTo(new[] { n1, n5 });
+            result.Should().Equal(new[] { n1, n5 });
         }
 
         [TestMethod]
@@ -1289,11 +1260,8 @@ namespace BasicAlgorithm.BasicAlgorithmTests
         [DataRow(11, 21, false)]
         public void ShouldCheckIfHas15Or20OnArray(int n1, int n2, bool expectedResult)
         {
-            //Arrange
-            int[] input = { n1, n2 };
-
             //Act
-            bool result = _exercise.Has15Or20(input);
+            bool result = _exercise.Has15Or20(new[] { n1, n2 });
 
             //Assert
             result.Should().Be(expectedResult);
@@ -1303,28 +1271,352 @@ namespace BasicAlgorithm.BasicAlgorithmTests
         [DataRow(10, 20, -30, -40, 30)]
         public void ShouldCheckIfHasNot15Or20OnArray(int n1, int n2, int n3, int n4, int n5)
         {
-            //Arrange
-            int[] input = { n1, n2, n3, n4, n5 };
-
             //Act
-            int[] result = _exercise.FirstIntAndZeroToDoubleSizedArray(input);
+            int[] result = _exercise.FirstIntAndZeroToDoubleSizedArray(new[] { n1, n2, n3, n4, n5 });
 
             //Assert
-            result.Should().BeEquivalentTo(new[] { 10, 0, 0, 0, 0, 0, 0, 0, 0, 0});
+            result.Should().Equal(new[] { 10, 0, 0, 0, 0, 0, 0, 0, 0, 0 });
         }
 
         [TestMethod]
-        [DataRow(12,20,false)]
-        [DataRow(20,20,true)]
-        [DataRow(10,10,true)]
-        [DataRow(10,17,false)]
+        [DataRow(12, 20, false)]
+        [DataRow(20, 20, true)]
+        [DataRow(10, 10, true)]
+        [DataRow(10, 17, false)]
         public void ShouldHaveBothValuesEqual10Or20(int n1, int n2, bool expectedResult)
         {
+            //Act
+            bool result = _exercise.AreEqual10Or20(new[] { n1, n2 });
+
+            //Assert
+            result.Should().Be(expectedResult);
+        }
+
+        [TestMethod]
+        [DataRow(1, 5, 7)]
+        public void ShouldSet1If7After5(int n1, int n2, int n3)
+        {
+            //Act
+            int[] result = _exercise.If7After5Set1(new[] { n1, n2, n3 });
+
+            //Assert
+            result.Should().Equal(new[] { n1, n2, n1 });
+        }
+
+        [TestMethod]
+        [DataRow(10, 20, -30, 10, 20, 30)]
+        public void ShouldCheckWhichArrayIsLarger(int n1, int n2, int n3, int n4, int n5, int n6)
+        {
+            //Act
+            int[] result = _exercise.IsLarger(new[] { n1, n2, n3 }, new[] { n4, n5, n6 });
+
+            //Assert
+            result.Should().Equal(new[] { n4, n5, n6 });
+        }
+
+        [TestMethod]
+        [DataRow(1, 5, 7, 9, 11, 13)]
+        public void ShouldReturnTwoMiddleElementsOfEvenArray(int n1, int n2, int n3, int n4, int n5, int n6)
+        {
+            //Act
+            int[] result = _exercise.TwoMiddleElements(new[] { n1, n2, n3, n4, n5, n6 });
+
+            //Assert
+            result.Should().Equal(new[] { n3, n4 });
+        }
+
+        [TestMethod]
+        [DataRow(10, 20, 30, 40, 50, 60)]
+        public void ShouldMergeTwoArrays(int n1, int n2, int n3, int n4, int n5, int n6)
+        {
+            //Act
+            int[] result = _exercise.MergeArrays(new[] { n1, n2, n3 }, new[] { n4, n5, n6 });
+
+            //Assert
+            result.Should().Equal(new[] { n1, n2, n3, n4, n5, n6 });
+        }
+
+        [TestMethod]
+        [DataRow(1, 5, 7, 9, 11, 13)]
+        public void ShouldSwapFirstAndLastElements(int n1, int n2, int n3, int n4, int n5, int n6)
+        {
+            //Act
+            int[] result = _exercise.FirstAndLastSwap((new[] { n1, n2, n3, n4, n5, n6 }));
+
+            //Assert
+            result.Should().Equal(new[] { n6, n2, n3, n4, n5, n1 });
+        }
+
+        [TestMethod]
+        [DataRow(1, 5, 7, 9, 11, 13)]
+        public void ShouldReturnMiddleElementsWithLength3(int n1, int n2, int n3, int n4, int n5, int n6)
+        {
+            //Act
+            int[] result = _exercise.ThreeMiddleElements(new[] { n1, n2, n3, n4, n5, n6 });
+
+            //Assert
+            result.Should().Equal(new[] { n3, n4, n5 });
+        }
+
+        /// <summary>
+        /// #############################################################################
+        /// </summary>
+
+        [TestMethod]
+        public void ShouldReturnLargestBetweenFirstLastAndMiddleElements()
+        {
             //Arrange
-            int[] input = { n1, n2 };
+            int[] input = { 1 };
+            int[] input2 = { 1, 2, 9 };
+            int[] input3 = { 1, 2, 9, 3, 3 };
+            int[] input4 = { 1, 2, 3, 4, 5, 6, 7 };
+            int[] input5 = { 1, 2, 2, 3, 7, 8, 9, 10, 6, 5, 4 };
 
             //Act
-            bool result = _exercise.AreEqual10Or20(input);
+            int result = _exercise.LargestElementFromFirstMiddleAndLast(input);
+            int result2 = _exercise.LargestElementFromFirstMiddleAndLast(input2);
+            int result3 = _exercise.LargestElementFromFirstMiddleAndLast(input3);
+            int result4 = _exercise.LargestElementFromFirstMiddleAndLast(input4);
+            int result5 = _exercise.LargestElementFromFirstMiddleAndLast(input5);
+
+            //Assert
+            result.Should().Be(1);
+            result2.Should().Be(9);
+            result3.Should().Be(9);
+            result4.Should().Be(7);
+            result5.Should().Be(8);
+        }
+
+        /// <summary>
+        /// #############################################################################
+        /// </summary>
+
+        [TestMethod]
+        [DataRow(1, 5, 7, 9, 11, 13)]
+        public void ShouldReturnFirstTwoElementsOrFullArray(int n1, int n2, int n3, int n4, int n5, int n6)
+        {
+            //Act
+            int[] result = _exercise.FirstTwoElements(new[] { n1, n2, n3, n4, n5, n6 });
+
+            //Assert
+            result.Should().Equal(new[] { n1, n2 });
+        }
+
+        [TestMethod]
+        [DataRow(1, 5, 7, 9, 10, 12, 2)]
+        [DataRow(2, 6, 8, 10, 12, 14, 6)]
+        public void ShouldCountHowManyEvenElements(int n1, int n2, int n3, int n4, int n5, int n6, int expectedResult)
+        {
+            //Act
+            int result = _exercise.HowManyEvenElements(new[] { n1, n2, n3, n4, n5, n6 });
+
+            //Assert
+            result.Should().Be(expectedResult);
+        }
+
+        [TestMethod]
+        [DataRow(1, 5, 7, 9, 10, 12, 11)]
+        public void ShouldReturnTheDiferenceBetweenFirstAndLastElement(int n1, int n2, int n3, int n4, int n5, int n6, int expectedResult)
+        {
+            //Act
+            int result = _exercise.DiferenceBetweenLargestAndSmallest(new[] { n1, n2, n3, n4, n5, n6 });
+
+            //Assert
+            result.Should().Be(expectedResult);
+        }
+
+        [TestMethod]
+        [DataRow(1, 5, 7, 9, 10, 17, 32)]
+        public void ShouldSumArrayExcluding17(int n1, int n2, int n3, int n4, int n5, int n6, int expectedResult)
+        {
+            //Act
+            int result = _exercise.SumArrayExcluding17(new[] { n1, n2, n3, n4, n5, n6 });
+
+            //Assert
+            result.Should().Be(expectedResult);
+        }
+
+        [TestMethod]
+        [DataRow(5, 6, 1, 5, 6, 9, 10, 17, 37)]
+        [DataRow(1, 5, 6, 9, 10, 17, 5, 6, 37)]
+        public void ShouldSumExceptWhen5IsFollowedBy6(int n1, int n2, int n3, int n4, int n5, int n6, int n7, int n8, int expectedResult)
+        {
+            //Act
+            int result = _exercise.SumExcluding5FollowedBy6(new[] { n1, n2, n3, n4, n5, n6, n7, n8 });
+
+            //Assert
+            result.Should().Be(expectedResult);
+        }
+
+        [TestMethod]
+        [DataRow(1, 5, 6, 9, 10, 17, false)]
+        [DataRow(1, 5, 5, 9, 10, 17, true)]
+        public void ShouldCheckIfThereAre5Duped(int n1, int n2, int n3, int n4, int n5, int n6, bool expectedResult)
+        {
+            //Act
+            bool result = _exercise.Is5FollowedBy5(new[] { n1, n2, n3, n4, n5, n6 });
+
+            //Assert
+            result.Should().Be(expectedResult);
+        }
+
+        [TestMethod]
+        [DataRow(1, 5, 6, 9, 10, 17, true)]
+        [DataRow(1, 4, 7, 9, 10, 17, true)]
+        [DataRow(1, 1, 2, 9, 10, 17, false)]
+        public void ShouldCheckIfHas5Or7(int n1, int n2, int n3, int n4, int n5, int n6, bool expectedResult)
+        {
+            //Act
+            bool result = _exercise.Has5Or7(new[] { n1, n2, n3, n4, n5, n6 });
+
+            //Assert
+            result.Should().Be(expectedResult);
+        }
+
+        [TestMethod]
+        [DataRow(1, 5, 6, 9, 10, 17, false)]
+        [DataRow(1, 5, 5, 5, 10, 17, true)]
+        [DataRow(1, 1, 5, 5, 5, 5, false)]
+        public void ShouldCheckIfTheSumOf5sInArrayIs15(int n1, int n2, int n3, int n4, int n5, int n6, bool expectedResult)
+        {
+            //Act
+            bool result = _exercise.IsSumEqual15(new[] { n1, n2, n3, n4, n5, n6 });
+
+            //Assert
+            result.Should().Be(expectedResult);
+        }
+
+        [TestMethod]
+        [DataRow(1, 5, 6, 9, 3, 3, true)]
+        [DataRow(1, 5, 5, 5, 10, 17, false)]
+        [DataRow(1, 3, 3, 5, 5, 5, false)]
+        public void ShouldCheckIf3Outnumbers5(int n1, int n2, int n3, int n4, int n5, int n6, bool expectedResult)
+        {
+            //Act
+            bool result = _exercise.HasMore3Than5(new[] { n1, n2, n3, n4, n5, n6 });
+
+            //Assert
+            result.Should().Be(expectedResult);
+        }
+
+        [TestMethod]
+        [DataRow(5, 5, 5, 5, 5, true)]
+        [DataRow(3, 3, 3, 3, 3, true)]
+        [DataRow(3, 3, 3, 5, 5, true)]
+        [DataRow(1, 6, 8, 10, 5, false)]
+        public void ShouldCheckIfHasOnly3Or5(int n1, int n2, int n3, int n4, int n5, bool expectedResult)
+        {
+            //Act
+            bool result = _exercise.IsOnly3Or5(new[] { n1, n2, n3, n4, n5 });
+
+            //Assert
+            result.Should().Be(expectedResult);
+        }
+
+        [TestMethod]
+        [DataRow(5, 5, 5, 5, 5, true)]
+        [DataRow(3, 3, 3, 3, 3, true)]
+        [DataRow(3, 3, 3, 5, 5, false)]
+        [DataRow(1, 6, 8, 10, 5, true)]
+        public void ShouldCheckIfHas3Or5ButNotBoth(int n1, int n2, int n3, int n4, int n5, bool expectedResult)
+        {
+            //Act
+            bool result = _exercise.Has3Or5NotBoth(new[] { n1, n2, n3, n4, n5 });
+
+            //Assert
+            result.Should().Be(expectedResult);
+        }
+
+        [TestMethod]
+        [DataRow(5, 5, 5, 5, 5, true)]
+        [DataRow(1, 2, 3, 4, 5, false)]
+        [DataRow(3, 3, 3, 5, 5, true)]
+        [DataRow(1, 5, 5, 7, 8, true)]
+        public void ShouldCheckIfHasADouble3Or5(int n1, int n2, int n3, int n4, int n5, bool expectedResult)
+        {
+            //Act
+            bool result = _exercise.HasDouble3Or5(new[] { n1, n2, n3, n4, n5 });
+
+            //Assert
+            result.Should().Be(expectedResult);
+        }
+
+        [TestMethod]
+        [DataRow(3, 5, 1, 3, 7, true)]
+        [DataRow(1, 2, 3, 4, 5, false)]
+        [DataRow(3, 3, 3, 5, 5, true)]
+        [DataRow(2, 5, 5, 7, 8, false)]
+        public void ShouldCheckIfHas3Before5(int n1, int n2, int n3, int n4, int n5, bool expectedResult)
+        {
+            //Act
+            bool result = _exercise.Has3BBefore5(new[] { n1, n2, n3, n4, n5 });
+
+            //Assert
+            result.Should().Be(expectedResult);
+        }
+
+        [TestMethod]
+        [DataRow(3, 5, 1, 3, 7, true)]
+        [DataRow(1, 2, 3, 4, 5, false)]
+        [DataRow(2, 4, 6, 8, 10, true)]
+        public void ShouldCheckIfHasDoubleEvenOrDoubleOdd(int n1, int n2, int n3, int n4, int n5, bool expectedResult)
+        {
+            //Act
+            bool result = _exercise.HasDoubleEvenOrDoubleOdd(new[] { n1, n2, n3, n4, n5 });
+
+            //Assert
+            result.Should().Be(expectedResult);
+        }
+
+        [TestMethod]
+        [DataRow(3, 5, 1, 5, 3, 5, 7, 5, 1, 5, true)]
+        [DataRow(3, 5, 5, 5, 5, 5, 5, 6, 2, 1, false)]
+        [DataRow(3, 5, 2, 5, 4, 5, 7, 5, 8, 5, true)]
+        [DataRow(3, 5, 5, 5, 5, 5, 5, 5, 5, 5, false)]
+        public void ShouldHave5FivesAndNoneAdjacentToAnother(int n1, int n2, int n3, int n4, int n5, int n6, int n7, int n8, int n9, int n10, bool expectedResult)
+        {
+            //Act
+            bool result = _exercise.Has5FivesNoneNextToEachOther(new[] { n1, n2, n3, n4, n5, n6, n7, n8, n9, n10 });
+
+            //Assert
+            result.Should().Be(expectedResult);
+        }
+
+        [TestMethod]
+        [DataRow(3, 5, 5, 3, 7, true)]
+        [DataRow(5, 5, 4, 5, 1, false)]
+        [DataRow(3, 5, 5, 5, 5, true)]
+        [DataRow(2, 4, 5, 5, 6, true)]
+        public void ShouldCheckIfAll5IsNextToAnother(int n1, int n2, int n3, int n4, int n5, bool expectedResult)
+        {
+            //Act
+            bool result = _exercise.Is5NextToAnother(new[] { n1, n2, n3, n4, n5 });
+
+            //Assert
+            result.Should().Be(expectedResult);
+        }
+
+        [TestMethod]
+        [DataRow(3, 7, 5, 5, 3, 7, 2, true)]
+        [DataRow(3, 7, 5, 5, 3, 7, 3, false)]
+        [DataRow(3, 7, 5, 3, 7, 5, 3, true)]
+        public void ShouldCheckIfTheStartAndLastElementsAreEqual(int n1, int n2, int n3, int n4, int n5, int n6, int count, bool expectedResult)
+        {
+            //Act
+            bool result = _exercise.StartAndEndEqualByNumber(new[] { n1, n2, n3, n4, n5, n6 }, count);
+
+            //Assert
+            result.Should().Be(expectedResult);
+        }
+
+        [TestMethod]
+        [DataRow(1, 2, 3, 5, 3, 7, true)]
+        [DataRow(3, 7, 5, 5, 3, 7, false)]
+        [DataRow(3, 7, 5, 5, 6, 7, true)]
+        public void ShouldCheckForThreeIncreasingAdjacent(int n1, int n2, int n3, int n4, int n5, int n6, bool expectedResult)
+        {
+            //Act
+            bool result = _exercise.HasThreeIncreasingAdjacent(new[] { n1, n2, n3, n4, n5, n6 });
 
             //Assert
             result.Should().Be(expectedResult);

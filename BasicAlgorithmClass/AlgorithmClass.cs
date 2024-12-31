@@ -1,5 +1,6 @@
 ﻿using System.Diagnostics.Tracing;
 using System.Text.RegularExpressions;
+using System.Xml;
 
 namespace BasicAlgorithm.BasicAlgorithmClass
 {
@@ -635,6 +636,165 @@ namespace BasicAlgorithm.BasicAlgorithmClass
         public bool AreEqual10Or20(int[] input)
         {
             return input.All(x => x == 10) || input.All(x => x == 20);
+        }
+
+        public int[] If7After5Set1(int[] input)
+        {
+            for (int i = 0; i < input.Length; i++)
+            {
+                if (input[i] == 7 && input[i - 1] == 5) input[i] = 1;
+            }
+
+            return input;
+        }
+
+        public int[] IsLarger(int[] input, int[] input2)
+        {
+            return input.Sum() > input2.Sum() ? input : input2;
+        }
+
+        public int[] TwoMiddleElements(int[] input)
+        {
+            return input.Skip((input.Length / 2) - 1).Take(2).ToArray();
+        }
+
+        public int[] MergeArrays(int[] input, int[] input2)
+        {
+            return input.Concat(input2).ToArray();
+        }
+
+        public int[] FirstAndLastSwap(int[] input)
+        {
+            (input[0], input[^1]) = (input[^1], input[0]);
+            return input;
+        }
+
+        public int[] ThreeMiddleElements(int[] input)
+        {
+            return input.Skip((input.Length / 2) - 1).Take(3).ToArray();
+        }
+
+        public int LargestElementFromFirstMiddleAndLast(int[] input)
+        {
+            if (input.Length == 1) return input[0];
+
+            int middleIndex = input.Length % 2 == 0 ? input.Length / 2 - 1 : input.Length / 2;
+
+            return new[] { input[0], input[^1], input[middleIndex] }.Max();
+        }
+
+        public int[] FirstTwoElements(int[] input)
+        {
+            return new int[] { input[0], input[1] };
+        }
+
+        public int HowManyEvenElements(int[] input)
+        {
+            return input.Where(x => x % 2 == 0).Count();
+        }
+
+        public int DiferenceBetweenLargestAndSmallest(int[] input)
+        {
+            return input.Max() - input.Min();
+        }
+
+        public int SumArrayExcluding17(int[] input)
+        {
+            return input.Where(x => x != 17).Sum();
+        }
+
+        public int SumExcluding5FollowedBy6(int[] input)
+        {
+            return input.Select((x, i) => new { Value = x, Index = i })
+                .Where(t => !(t.Value == 5 && t.Index < input.Length - 1 && input[t.Index + 1] == 6))
+                .Where(t => t.Value != 6 || input.Take(t.Index).Any(x => x == 5) == false)
+                .Select(t => t.Value)
+                .ToArray()
+                .Sum();
+        }
+
+        public bool Is5FollowedBy5(int[] input)
+        {
+            return input.Zip(input.Skip(1), (a, b) => a == 5 && b == 5).Any(x => x);
+        }
+
+        public bool Has5Or7(int[] ints)
+        {
+            return ints.Any(x => x == 5 || x == 7);
+        }
+
+        public bool IsSumEqual15(int[] ints)
+        {
+            return ints.Count(x => x == 5) == 3;
+        }
+
+        public bool HasMore3Than5(int[] ints)
+        {
+            return ints.Count(x => x == 3) > ints.Count(x => x == 5);
+        }
+
+        public bool IsOnly3Or5(int[] ints)
+        {
+            return ints.All(x => x == 3 || x == 5);
+        }
+
+        public bool Has3Or5NotBoth(int[] ints)
+        {
+            return ints.Any(x => x == 3) ^ ints.Any(x => x == 5);
+        }
+
+        public bool HasDouble3Or5(int[] ints)
+        {
+            return ints.Zip(ints.Skip(1), (a, b) => a == 3 && b == 3).Any(x => x)
+                || ints.Zip(ints.Skip(1), (a, b) => a == 5 && b == 5).Any(x => x);
+        }
+
+        public bool Has3BBefore5(int[] ints)
+        {
+            return ints.Zip(ints.Skip(1), (a, b) => a == 3 && b == 5).Any(x => x);
+        }
+
+        public bool HasDoubleEvenOrDoubleOdd(int[] ints)
+        {
+            return ints.Zip(ints.Skip(1), (a, b) =>
+                (a % 2 == 0 && b % 2 == 0) ||
+                (a % 2 != 0 && b % 2 != 0))
+                .Any(x => x);
+        }
+
+        public bool Has5FivesNoneNextToEachOther(int[] ints)
+        {
+            return ints.Count(x => x == 5) == 5
+                && ints.Zip(ints.Skip(1), (a, b) => a == 5 && b != 5).Any(x => x);
+        }
+
+        public bool Is5NextToAnother(int[] ints)
+        {
+            for (int i = 0; i < ints.Length; i++)
+            {
+                if (ints[i] == 5)
+                {
+                    if (i == 0 && ints[i + 1] != 5 ||
+                        i == ints.Length - 1 && ints[i - 1] != 5 ||
+                        (i > 0 && i < ints.Length - 1 && ints[i - 1] != 5 && ints[i + 1] != 5))
+                    {
+                        return false;
+                    }
+                }
+            }
+            return true;
+        }
+
+        public bool StartAndEndEqualByNumber(int[] ints, int count)
+        {
+            int[] start = ints.Take(count).ToArray();
+            int[] end = ints.TakeLast(count).ToArray();
+            return start.SequenceEqual(end);
+        }
+
+        public bool HasThreeIncreasingAdjacent(int[] ints)
+        {
+            return ints.Where((x, i) => i < ints.Length - 2 && x + 1 == ints[i + 1] && x + 2 == ints[i + 2]).Any();
         }
     }
 }
