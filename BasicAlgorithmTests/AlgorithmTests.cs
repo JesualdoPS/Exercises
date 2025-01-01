@@ -29,13 +29,13 @@ namespace BasicAlgorithm.BasicAlgorithmTests
         }
 
         [TestMethod]
-        [DataRow(53, 6)]
-        [DataRow(30, 21)]
-        [DataRow(51, 0)]
-        public void ShouldReturnAbsoluteDifferenceWithTripleForGreater(int input, int expectedResult)
+        [DataRow(53, 51, 6)]
+        [DataRow(30, 72, 42)]
+        [DataRow(26, 26, 0)]
+        public void ShouldReturnAbsoluteDifferenceWithTripleForGreater(int input, int subtractor, int expectedResult)
         {
             //Act
-            int result = _exercise.AbsoluteDiferenceOrTriple(input);
+            int result = _exercise.AbsoluteDiferenceOrTriple(input, subtractor);
 
             //Assert
             result.Should().Be(expectedResult);
@@ -46,11 +46,10 @@ namespace BasicAlgorithm.BasicAlgorithmTests
         [DataRow(25, 5, true)]
         [DataRow(20, 30, true)]
         [DataRow(20, 25, false)]
-        public void ShouldCheckIfIts30OrSum30(int n1, int n2, bool expectedResult)
+        public void ShouldCheckIfIts30OrSum30(double n1, double n2, bool expectedResult)
         {
             //Act
             bool result = _exercise.Is30OrSum30(new[] { n1, n2 });
-
 
             //Assert
             result.Should().Be(expectedResult);
@@ -142,7 +141,7 @@ namespace BasicAlgorithm.BasicAlgorithmTests
         [DataRow(14, true)]
         [DataRow(12, true)]
         [DataRow(37, false)]
-        public void ShouldBeMultipleOf3Or7(int input, bool expectedResult)
+        public void ShouldBeMultipleOf3Or7(double input, bool expectedResult)
         {
             //Act
             bool result = _exercise.IsMultipleOf3Or7(input);
@@ -181,7 +180,7 @@ namespace BasicAlgorithm.BasicAlgorithmTests
         [DataRow(120, -1, true)]
         [DataRow(-1, 120, true)]
         [DataRow(2, 120, false)]
-        public void ShouldTemperatureBeLessThan0AndMoreThan100(int n1, int n2, bool expectedResult)
+        public void ShouldOneTemperatureBeNegativeAndTheOtherMoreThan100(int n1, int n2, bool expectedResult)
         {
             //Act
             bool result = _exercise.CheckTemperatureLessThan0AndMoreThan100(new[] { n1, n2 });
@@ -193,7 +192,7 @@ namespace BasicAlgorithm.BasicAlgorithmTests
         [TestMethod]
         [DataRow(100, 199, true)]
         [DataRow(250, 300, false)]
-        [DataRow(105, 190, true)]
+        [DataRow(105, 210, true)]
         public void ShouldCheckIfOneIntIsBetween100And200(int n1, int n2, bool expectedResult)
         {
             //Act
@@ -262,7 +261,7 @@ namespace BasicAlgorithm.BasicAlgorithmTests
         [DataRow(25, 35, false)]
         [DataRow(40, 50, true)]
         [DataRow(55, 60, true)]
-        public void ShouldCheckIfBothIntsAreBetween40And50And60(int n1, int n2, bool expectedResult)
+        public void ShouldCheckIfBothIntsAreBetween40And50Or50And60(int n1, int n2, bool expectedResult)
         {
             //Act
             bool result = _exercise.IsBetween40_50Or50_60(new[] { n1, n2 });
@@ -292,7 +291,7 @@ namespace BasicAlgorithm.BasicAlgorithmTests
         [DataRow("false", false)]
         [DataRow("zzzz", true)]
         [DataRow("ZZZZ", true)]
-        public void ShouldHave2Or4Zs(string input, bool expectedResult)
+        public void ShouldHaveBetween2Or4Zs(string input, bool expectedResult)
         {
             //Act
             bool result = _exercise.HasBetween2Or4Zs(input);
@@ -352,9 +351,7 @@ namespace BasicAlgorithm.BasicAlgorithmTests
         public void ShouldCreateNCopiesOfFirstThreeCharacters(string text, int repeats, string expectedResult)
         {
             //Act
-            string result = _exercise.CopyOfThreeCharacters(text, repeats);
-            string result2 = _exercise.CopyOfThreeCharacters(text, repeats);
-            string result3 = _exercise.CopyOfThreeCharacters(text, repeats);
+            string result = _exercise.CopiesOfFirstThreeCharacters(text, repeats);
 
             //Arrange
             result.Should().Be(expectedResult);

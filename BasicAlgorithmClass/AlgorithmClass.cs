@@ -1,6 +1,5 @@
-﻿using System.Diagnostics.Tracing;
+﻿using System.Net;
 using System.Text.RegularExpressions;
-using System.Xml;
 
 namespace BasicAlgorithm.BasicAlgorithmClass
 {
@@ -8,23 +7,27 @@ namespace BasicAlgorithm.BasicAlgorithmClass
     {
         public int SumOfNumbersInArrayOrTrupleIfEqual(int[] input)
         {
-            int result = (input[0] == input[1]) ? input.Sum() * 3 : input.Take(2).Sum();
-            return result;
+            return input.Distinct().Count() == 1 ? input.Sum() * 3 : input.Take(2).Sum();
         }
 
-        public int AbsoluteDiferenceOrTriple(int input)
+        public int AbsoluteDiferenceOrTriple(int input, int subtractor)
         {
-            return (input > 51) ? Math.Abs(input - 51) * 3 : Math.Abs(input - 51);
+            if (input <= int.MinValue || input >= int.MaxValue) throw new OverflowException();
+
+            return (input > subtractor) ? Math.Abs(input - subtractor) * 3 : Math.Abs(input - subtractor);
         }
 
-        public bool Is30OrSum30(int[] input)
+        public bool Is30OrSum30(double[] input)
         {
-            return input.Contains(30) || input[0] + input[1] == 30;
+            if (input.Any(x => x < 0 || x > 1000))
+                throw new NumberOutOfRangeException("Input cannot be less than 0 or more than 1000");
+
+            return input.Contains(30) || input.Sum() == 30;
         }
 
         public bool IsWithin10Of100Or200(int input)
         {
-            return (input >= 90 && input <= 110) || (input >= 190 && input <= 210);
+            return Math.Abs(input - 100) <= 10 || Math.Abs(input - 200) <= 10;
         }
 
         public string AddIf(string input)
@@ -34,22 +37,14 @@ namespace BasicAlgorithm.BasicAlgorithmClass
 
         public string RemoveAtPosition(string input, int position)
         {
-            string result = input.Remove(position, 1);
-
-            return result;
+            return input.Remove(position, 1);
         }
 
         public string ExchangeFirstAndLast(string input)
         {
             if (input.Length <= 1) { return input; }
 
-            char[] charList = input.ToCharArray();
-            char temp = charList[0];
-            charList[0] = charList[^1];
-            charList[^1] = temp;
-            var result = new string(charList);
-
-            return result;
+            return input[^1] + input.Substring(1, input.Length - 2) + input[0];
         }
 
         public string FourCoppiesOfFirstCharacter(string input)
@@ -57,9 +52,7 @@ namespace BasicAlgorithm.BasicAlgorithmClass
             if (input.Length < 2) { return input; }
 
             string firstCharacter = input.Substring(0, 2);
-            var result = string.Concat(Enumerable.Repeat(firstCharacter, 4));
-
-            return result.Trim();
+            return string.Concat(Enumerable.Repeat(firstCharacter, 4)).Trim();
         }
 
         public string LastCharAtFrontAndBack(string input)
@@ -70,11 +63,13 @@ namespace BasicAlgorithm.BasicAlgorithmClass
             return result;
         }
 
-        public bool IsMultipleOf3Or7(int input)
+        public bool IsMultipleOf3Or7(double input)
         {
-            var result = input % 3 == 0 || input % 7 == 0 ? true : false;
+            if (double.IsNaN(input)) throw new ArgumentException($"{input} is not a number");
 
-            return result;
+            if (input < 0) throw new NegativeNumberException("Input cannot be negative");
+
+            return input % 3 == 0 || input % 7 == 0;
         }
 
         public string AddFirstThreeCharAtFrontAndBack(string input)
@@ -83,7 +78,6 @@ namespace BasicAlgorithm.BasicAlgorithmClass
 
             string firstThree = input.Substring(0, 3);
             return string.Concat(firstThree, input, firstThree);
-
         }
 
         public bool StartsWithCSharp(string input)
@@ -118,38 +112,30 @@ namespace BasicAlgorithm.BasicAlgorithmClass
 
         public int IsClosestTo100(int[] input)
         {
-            if (input[0] == input[1]) { return 0; }
-            return 100 - input[0] < 100 - input[1] ? input[0] : input[1];
+            if (input.First() == input.Last()) return 0;
+            return 100 - input.First() < 100 - input.Last() ? input.First() : input.Last();
         }
 
         public bool IsBetween40_50Or50_60(int[] input)
         {
-            var intervalo1 = input.All(i => i >= 40 && i <= 50);
-            var intervalo2 = input.All(i => i >= 50 && i <= 60);
-            return intervalo1 || intervalo2;
+            return input.All(i => i >= 40 && i <= 50) || input.All(i => i >= 50 && i <= 60);
         }
 
         public int IsLargestBetween20_30(int[] input)
         {
-            return input.Any(i => i < 20 || i > 30) ? 0 : input.Max();
+            int[] between20and30 = input.Where(i => i >= 20 && i <= 30).ToArray();
+            return between20and30.Any() ? between20and30.Max() : 0;
         }
 
         public bool HasBetween2Or4Zs(string input)
         {
-            int count = 0;
-            char[] chars = input.ToCharArray();
-
-            foreach (char item in chars)
-            {
-                if (item == 'Z' || item == 'z') { count++; }
-            }
-
-            return count >= 2 && count <= 4 ? true : false;
+            int zCounter = input.ToLower().Count(x => x == 'z');
+            return zCounter >= 2 && zCounter <= 4;
         }
 
         public bool HasSameLastDigit(int[] input)
         {
-            return input[0].ToString().Last() == input[1].ToString().Last();
+            return input.First() % 10 == input.Last() % 10;
         }
 
         public string UpperCaseLastThree(string input)
@@ -161,18 +147,14 @@ namespace BasicAlgorithm.BasicAlgorithmClass
 
         public string CopyStringByNTimes(string input, int repeat)
         {
-            if (repeat == 1) { return input; }
-
             return string.Concat(Enumerable.Repeat(input, repeat));
         }
 
-        public string CopyOfThreeCharacters(string text, int repeats)
+        public string CopiesOfFirstThreeCharacters(string text, int repeats)
         {
-            if (text.Length < 3) { return string.Concat(Enumerable.Repeat(text, repeats)); }
-            string brokenString = text.Substring(0, 3);
+            if (text.Length < 3) return string.Concat(Enumerable.Repeat(text, repeats));
 
-            string result = string.Concat(Enumerable.Repeat(brokenString, repeats));
-            return result;
+            return string.Concat(Enumerable.Repeat(text.Substring(0, 3), repeats));
         }
 
         public int StringPartCounter(string input)
@@ -191,42 +173,25 @@ namespace BasicAlgorithm.BasicAlgorithmClass
         {
             int index = input.IndexOf('a');
 
-            return (input[index + 1] == 'a') ? true : false;
+            return input[index + 1] == 'a';
         }
 
         public string EveryOtherCharacter(string input)
         {
-            string result = "";
-
-            for (int i = 0; i < input.Length; i += 2)
-            {
-                result += input[i];
-            }
-
-            return result;
+            return new string(input.Where((v, i) => i % 2 == 0).ToArray());
         }
 
         public string CumulativeSubstring(string input)
         {
-            if (input.Length <= 1) { return input; }
+            if (input.Length <= 1) return input;
 
-            string result = string.Concat(Enumerable.Range(1, input.Length).Select(i => input.Substring(0, i)));
-
-            return result;
+            return string.Concat(Enumerable.Range(1, input.Length).Select(i => input.Substring(0, i)));
         }
 
         public int RepeatOfTwoFirstCharacters(string input)
         {
-            if (input[1] != input[^1]) { return 0; }
-
-            string subString = input.Substring(0, 2);
-
-            int count = -1;
-
-            for (int i = 0; i < input.Length - 1; i++)
-            {
-                if (input.Substring(i, 2).Equals(subString)) { count++; }
-            }
+            int count = Regex.Matches(input, input.Substring(0, 2)).Count - 1;
+            if (input[1] != input[^1]) count -= 1;
 
             return count;
         }
@@ -238,20 +203,12 @@ namespace BasicAlgorithm.BasicAlgorithmClass
 
         public bool IsInTheFirstFour(int[] array, int check)
         {
-            for (int i = 0; i < 4; i++)
-            {
-                if (array[i] == check) { return true; }
-            }
-            return false;
+            return array.Take(4).Contains(check);
         }
 
         public bool HasSequence123(int[] array)
         {
-            for (int i = 0; i < array.Length - 1; i++)
-            {
-                if (array[i] == 1 && array[i + 1] == 2 && array[i + 2] == 3) { return true; }
-            }
-            return false;
+            return string.Concat(array).Contains("123");
         }
 
         public int SubstringMatchingCount(string[] array)
@@ -361,13 +318,7 @@ namespace BasicAlgorithm.BasicAlgorithmClass
 
         public int SumIgnoring13(int[] input)
         {
-            int result = 0;
-            foreach (var item in input)
-            {
-                if (item == 13) break;
-                result += item;
-            }
-            return result;
+            return input.TakeWhile(x => x != 13).Sum();
         }
 
         public int SumIgnoringBetween10And13(int[] input)
@@ -387,8 +338,8 @@ namespace BasicAlgorithm.BasicAlgorithmClass
 
         public string FormatS1S2S2S1(string[] array)
         {
-            var s1 = array[0];
-            var s2 = array[1];
+            var s1 = array.First();
+            var s2 = array.Last();
 
             return string.Concat(s1, s2, s2, s1);
         }
@@ -424,17 +375,15 @@ namespace BasicAlgorithm.BasicAlgorithmClass
 
         public string LongShortLongString(string[] input)
         {
-            string longer = input.MaxBy(x => x.Length);
-            string shorter = input.MinBy(x => x.Length);
+            string longer = input.OrderByDescending(s => s.Length).First();
+            string shorter = input.OrderByDescending(s => s.Length).Last();
 
             return $"{longer}{shorter}{longer}";
         }
 
         public string CombineStringsWithoutFirstChar(string[] input)
         {
-            string newString1 = input[0].Substring(1);
-            string newString2 = input[1].Substring(1);
-            return $"{newString1}{newString2}";
+            return input[0].Substring(1) + input[1].Substring(1);
         }
 
         public string MoveFirstTwoCharsToEnd(string input)
@@ -862,6 +811,8 @@ namespace BasicAlgorithm.BasicAlgorithmClass
 
         public int LargestAverageBetweenHalves(int[] ints)
         {
+            if (ints.Length == 0) throw new EmptyArrayException("Array cannot be empty");
+
             int middle = ints.Length / 2;
             return Math.Max(ints.Take(middle).Sum(), ints.TakeLast(middle).Sum());
         }
@@ -923,6 +874,8 @@ namespace BasicAlgorithm.BasicAlgorithmClass
 
         public string[] AllToUpper(string[] strings)
         {
+            if (strings.Any(x => x == string.Empty)) throw new NullReferenceException("No string can be null");
+
             return strings.Select(x => x.ToUpper()).ToArray();
         }
 
@@ -940,5 +893,76 @@ namespace BasicAlgorithm.BasicAlgorithmClass
         {
             return ints.Where(x => x.ToString().Last() != '7').ToArray();
         }
+
+        public void FileReader(string filePath)
+        {
+            if (!File.Exists(filePath)) throw new FileNotFoundException();
+        }
+
+        public int IntConverter(string input)
+        {
+            try
+            {
+                return Convert.ToInt32(input);
+            }
+            catch (FormatException)
+            {
+                throw new FormatException();
+            }
+        }
+
+        public double Divide(double n1, double n2)
+        {
+            if (n2 == 0) throw new DivideByZeroException();
+
+            return n1 / n2;
+        }
+
+        public DateTime DateTimeConverter(string date)
+        {
+            try
+            {
+                return DateTime.Parse(date);
+            }
+            catch
+            {
+                throw new FormatException();
+            }
+        }
+
+        public int CalculateFactorial(int input)
+        {
+            int factorial = 1;
+
+            for (int i = 1; i <= input; i++)
+            {
+                checked
+                { factorial *= i; }
+            }
+            return (factorial > int.MaxValue) ? throw new OverflowException() : factorial;
+        }
+
+        public void URLDownloader(string url)
+        {
+            if (url == string.Empty) throw new WebException("URL is Empty");
+
+            var webClient = new HttpClient();
+            string content = webClient.GetStringAsync(url).Result;
+        }
+    }
+
+    public class NegativeNumberException : Exception
+    {
+        public NegativeNumberException(string message) : base(message) { }
+    }
+
+    public class NumberOutOfRangeException : Exception
+    {
+        public NumberOutOfRangeException(string message) : base(message) { }
+    }
+
+    public class EmptyArrayException : Exception
+    {
+        public EmptyArrayException(string message) : base(message) { }
     }
 }
