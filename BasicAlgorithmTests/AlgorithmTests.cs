@@ -1,3 +1,4 @@
+using System.Xml.XPath;
 using BasicAlgorithm.BasicAlgorithmClass;
 using FluentAssertions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
@@ -1620,6 +1621,271 @@ namespace BasicAlgorithm.BasicAlgorithmTests
 
             //Assert
             result.Should().Be(expectedResult);
+        }
+
+        [TestMethod]
+        [DataRow(1, 2, 3, 5, 7)]
+        public void ShouldReturnElementsBeforeThe5(int n1, int n2, int n3, int n4, int n5)
+        {
+            //Act
+            int[] result = _exercise.ElementsBefore5(new[] { n1, n2, n3, n4, n5 });
+
+            //Assert
+            result.Should().Equal(new[] { n1, n2, n3 });
+        }
+
+        [TestMethod]
+        [DataRow(1, 2, 5, 3, 7, 9, 11)]
+        public void ShouldReturnElementsAfterThe5(int n1, int n2, int n3, int n4, int n5, int n6, int n7)
+        {
+            //Act
+            int[] result = _exercise.ElementsAfter5(new[] { n1, n2, n3, n4, n5, n6, n7 });
+
+            //Assert
+            result.Should().Equal(new[] { n4, n5, n6, n7 });
+        }
+
+        [TestMethod]
+        [DataRow(1, 2, 0, 3, 5, 7, 0, 9, 11)]
+        public void ShouldShiftZerosToLeftInArray(int n1, int n2, int n3, int n4, int n5, int n6, int n7, int n8, int n9)
+        {
+            //Act
+            int[] result = _exercise.ZerosToLeft(new[] { n1, n2, n3, n4, n5, n6, n7, n8, n9 });
+
+            //Assert
+            result.Should().Equal(new[] { n3, n7, n1, n2, n4, n5, n6, n8, n9 });
+        }
+
+        [TestMethod]
+        [DataRow(1, 2, 5, 3, 5, 7, 5, 9, 11)]
+        public void ShouldReplace5With0AndShiftZerosRight(int n1, int n2, int n3, int n4, int n5, int n6, int n7, int n8, int n9)
+        {
+            //Act
+            int[] result = _exercise.Swap5ToZerosAndShiftToRight(new[] { n1, n2, n3, n4, n5, n6, n7, n8, n9 });
+
+            //Assert
+            result.Should().Equal(new[] { n1, n2, n4, n6, n8, n9, 0, 0, 0 });
+        }
+
+        [TestMethod]
+        [DataRow(1, 2, 3, 4, 5, 6, 7, 8, 9)]
+        public void ShouldShiftEvenNumbersBeforeOddNumbers(int n1, int n2, int n3, int n4, int n5, int n6, int n7, int n8, int n9)
+        {
+            //Act
+            int[] result = _exercise.EvenNumbersBeforOdd(new[] { n1, n2, n3, n4, n5, n6, n7, n8, n9 });
+
+            //Assert
+            result.Should().Equal(n2, n4, n6, n8, n1, n3, n5, n7, n9);
+        }
+
+        [TestMethod]
+        [DataRow(5, 5, 1, 5, 5, false)]
+        [DataRow(1, 2, 3, 4, 5, true)]
+        [DataRow(3, 3, 5, 5, 5, true)]
+        [DataRow(1, 5, 5, 7, 8, true)]
+        public void ShouldCheckIfEachElementIsLargerOrEqualPrevious(int n1, int n2, int n3, int n4, int n5, bool expectedResult)
+        {
+            //Act
+            bool result = _exercise.IsAllLargerThanBefore(new[] { n1, n2, n3, n4, n5 });
+
+            //Assert
+            result.Should().Be(expectedResult);
+        }
+
+        [TestMethod]
+        [DataRow(5, 5, 1, 15, 15, true)]
+        [DataRow(15, 2, 3, 4, 15, false)]
+        [DataRow(3, 3, 15, 15, 5, true)]
+        [DataRow(1, 5, 15, 7, 8, false)]
+        public void ShouldChecForTwo15sNextToEachOther(int n1, int n2, int n3, int n4, int n5, bool expectedResult)
+        {
+            //Act
+            bool result = _exercise.Has15NextToAnother(new[] { n1, n2, n3, n4, n5 });
+
+            //Assert
+            result.Should().Be(expectedResult);
+        }
+
+        [TestMethod]
+        [DataRow(1, 2, 3, 4, 6, 8, 18)]
+        [DataRow(15, 2, 3, 4, 15, 11, 30)]
+        public void ShouldReturnLargestAverageBetweenArrayHalves(int n1, int n2, int n3, int n4, int n5, int n6, int expectedResult)
+        {
+            //Act
+            int result = _exercise.LargestAverageBetweenHalves(new[] { n1, n2, n3, n4, n5, n6 });
+
+            //Assert
+            result.Should().Be(expectedResult);
+        }
+
+        [TestMethod]
+        [DataRow("a", "b", "bb", "c", "ccc", 1, 3)]
+        public void ShouldCountStringsMatchingLength(string str1, string str2, string str3, string str4, string str5, int lengthCount, int expectedResult)
+        {
+            //Act
+            int result = _exercise.StringLengthMatchingCount(new[] { str1, str2, str3, str4, str5 }, lengthCount);
+
+            //Assert
+            result.Should().Be(expectedResult);
+        }
+
+        [TestMethod]
+        [DataRow("a", "b", "bb", "c", "ccc", 3)]
+        public void ShouldReturnFirstNStringsFromStringArray(string str1, string str2, string str3, string str4, string str5, int elementCount)
+        {
+            //Act
+            string[] result = _exercise.FirstNStrings(new[] { str1, str2, str3, str4, str5 }, elementCount);
+
+            //Assert
+            result.Should().Equal(new[] { str1, str2, str3 });
+        }
+
+        [TestMethod]
+        [DataRow("a", "aaa", "b", "bbb", "c", "ccc", 3)]
+        public void ShouldReturnStringsMatchingGivenLength(string str1, string str2, string str3, string str4, string str5, string str6, int lengthCount)
+        {
+            //Act
+            string[] result = _exercise.MatchesGivenLegth(new[] { str1, str2, str3, str4, str5, str6 }, lengthCount);
+
+            //Assert
+            result.Should().Equal(new[] { str2, str4, str6 });
+        }
+
+        [TestMethod]
+        [DataRow(123, 2, true)]
+        [DataRow(133, 4, false)]
+        [DataRow(176, 5, false)]
+        public void ShouldCheckIfContainsGivenValue(int input, int value, bool expectedResult)
+        {
+            //Act
+            bool result = _exercise.HasGivenValue(input, value);
+
+            //Assert
+            result.Should().Be(expectedResult);
+        }
+
+        [TestMethod]
+        [DataRow(1, 2, 3, 5, 7, 9, 10, 3)]
+        public void ShouldReturnArrayOfOddNumbersWithGivenLength(int n1, int n2, int n3, int n4, int n5, int n6, int n7, int length)
+        {
+            //Act
+            int[] result = _exercise.ArrayOfOddNumbers(new[] { n1, n2, n3, n4, n5, n6, n7 }, length);
+
+            //Assert
+            result.Should().Equal(new[] { n1, n3, n4 });
+        }
+
+        [TestMethod]
+        [DataRow(1, 2, 3, 4, 3, 6, 9, 12, 3)]
+        [DataRow(1, 2, 3, 4, 5, 10, 15, 20, 5)]
+        public void ShouldMultiplyAllIntegersInArrayByGivenValue(int n1, int n2, int n3, int n4, int n5, int n6, int n7, int n8, int multiplier)
+        {
+            //Act
+            int[] result = _exercise.ArrayMultiplier(new[] { n1, n2, n3, n4 }, multiplier);
+
+            //Assert
+            result.Should().Equal(new[] { n5, n6, n7, n8 });
+        }
+
+        [TestMethod]
+        [DataRow(1, 2, 3, 4, 1, 8, 27, 64)]
+        public void ShouldReturnTheCubeOfEachElement(int n1, int n2, int n3, int n4, int n5, int n6, int n7, int n8)
+        {
+            //Act
+            int[] result = _exercise.CubeOfArray(new[] { n1, n2, n3, n4 });
+
+            //Assert
+            result.Should().Equal(new[] { n5, n6, n7, n8 });
+        }
+
+        [TestMethod]
+        [DataRow("1", "2", "3", "4", "#1#", "#2#", "#3#", "#4#")]
+        public void ShouldAddHashtagBeforeAndAfterTheString(string str1, string str2, string str3, string str4, string str5, string str6, string str7, string str8)
+        {
+            //Act
+            string[] result = _exercise.AddHashtag(new[] { str1, str2, str3, str4 });
+
+            //Assert
+            result.Should().Equal(new[] { str5, str6, str7, str8 });
+        }
+
+        [TestMethod]
+        [DataRow("1", "2", "3", "4", "1111", "2222", "3333", "4444", 4)]
+        [DataRow("1", "2", "3", "4", "11111", "22222", "33333", "44444", 5)]
+        public void ShouldRepeatStringByGivenValue(string str1, string str2, string str3, string str4, string str5, string str6, string str7, string str8, int repeats)
+        {
+            //Act
+            string[] result = _exercise.StringRepeat(new[] { str1, str2, str3, str4 }, repeats);
+
+            //Assert
+            result.Should().Equal(new[] { str5, str6, str7, str8 });
+        }
+
+        [TestMethod]
+        [DataRow(1, 2, 3, 4, 15, 20, 25, 30, 2, 5)]
+        [DataRow(1, 3, 5, 9, 70, 90, 110, 150, 6, 10)]
+        public void ShouldReturnValuePlusGivenValueAndMultipliedByAnother(int n1, int n2, int n3, int n4, int n5, int n6, int n7, int n8, int plus, int multiplier)
+        {
+            //Act
+            int[] result = _exercise.AddAndMultiply(new[] { n1, n2, n3, n4 }, plus, multiplier);
+
+            //Assert
+            result.Should().Equal(new[] { n5, n6, n7, n8 });
+        }
+
+        [TestMethod]
+        [DataRow(10, 22, 35, 41, 0, 2, 5, 1)]
+        public void ShouldReturnTheRightmostValue(int n1, int n2, int n3, int n4, int n5, int n6, int n7, int n8)
+        {
+            //Act
+            int[] result = _exercise.RightmostValue(new[] { n1, n2, n3, n4 });
+
+            //Assert
+            result.Should().Equal(new[] { n5, n6, n7, n8 });
+        }
+
+        [TestMethod]
+        [DataRow("Abc", "cdef", "js", "php", "ABC", "CDEF", "JS", "PHP")]
+        public void ShouldConvertWholeArrayToUppercase(string str1, string str2, string str3, string str4, string str5, string str6, string str7, string str8)
+        {
+            //Act
+            string[] result = _exercise.AllToUpper(new[] { str1, str2, str3, str4 });
+
+            //Assert
+            result.Should().Equal(new[] { str5, str6, str7, str8 });
+        }
+
+        [TestMethod]
+        [DataRow("abc", "cdaef", "js", "php", "bc", "cdef", "js", "php")]
+        public void ShouldRemoveAFromEachString(string str1, string str2, string str3, string str4, string str5, string str6, string str7, string str8)
+        {
+            //Act
+            string[] result = _exercise.RemoveTheA(new[] { str1, str2, str3, str4 });
+
+            //Assert
+            result.Should().Equal(new[] { str5, str6, str7, str8 });
+        }
+
+        [TestMethod]
+        [DataRow(0, -2, 1, 2, 3, 5, 4, 7, 8, 4)]
+        public void ShouldRemoveIntegersLessThanValue(int n1, int n2, int n3, int n4, int n5, int n6, int n7, int n8, int n9, int givenValue)
+        {
+            //Act
+            int[] result = _exercise.RemoveValueLessThanGiven(new[] { n1, n2, n3, n4, n5, n6, n7, n8, n9 }, givenValue);
+
+            //Assert
+            result.Should().Equal(new[] { n6, n8, n9 });
+        }
+
+        [TestMethod]
+        [DataRow(10, 22, 35, 47, 53, 67)]
+        public void ShouldRemoveIntegersEndingIn7(int n1, int n2, int n3, int n4, int n5, int n6)
+        {
+            //Act
+            int[] result = _exercise.RemoveEndingWith7(new[] { n1, n2, n3, n4, n5, n6 });
+
+            //Assert
+            result.Should().Equal(new[] { n1, n2, n3, n5 });
         }
     }
 }

@@ -703,6 +703,10 @@ namespace BasicAlgorithm.BasicAlgorithmClass
             return input.Where(x => x != 17).Sum();
         }
 
+        /// <summary>
+        /// #############################################################################
+        /// </summary>
+
         public int SumExcluding5FollowedBy6(int[] input)
         {
             return input.Select((x, i) => new { Value = x, Index = i })
@@ -712,6 +716,10 @@ namespace BasicAlgorithm.BasicAlgorithmClass
                 .ToArray()
                 .Sum();
         }
+
+        /// <summary>
+        /// #############################################################################
+        /// </summary>
 
         public bool Is5FollowedBy5(int[] input)
         {
@@ -768,6 +776,10 @@ namespace BasicAlgorithm.BasicAlgorithmClass
                 && ints.Zip(ints.Skip(1), (a, b) => a == 5 && b != 5).Any(x => x);
         }
 
+        /// <summary>
+        /// #############################################################################
+        /// </summary>
+
         public bool Is5NextToAnother(int[] ints)
         {
             for (int i = 0; i < ints.Length; i++)
@@ -785,6 +797,10 @@ namespace BasicAlgorithm.BasicAlgorithmClass
             return true;
         }
 
+        /// <summary>
+        /// #############################################################################
+        /// </summary>
+
         public bool StartAndEndEqualByNumber(int[] ints, int count)
         {
             int[] start = ints.Take(count).ToArray();
@@ -795,6 +811,134 @@ namespace BasicAlgorithm.BasicAlgorithmClass
         public bool HasThreeIncreasingAdjacent(int[] ints)
         {
             return ints.Where((x, i) => i < ints.Length - 2 && x + 1 == ints[i + 1] && x + 2 == ints[i + 2]).Any();
+        }
+
+        public int[] ElementsBefore5(int[] ints)
+        {
+            if (!ints.Contains(5)) return ints;
+
+            return ints.TakeWhile(x => x != 5).ToArray();
+        }
+
+        public int[] ElementsAfter5(int[] ints)
+        {
+            if (!ints.Contains(5)) return ints;
+
+            int index = Array.IndexOf(ints, 5);
+
+            return ints.Skip(index + 1).ToArray();
+        }
+
+        public int[] ZerosToLeft(int[] ints)
+        {
+            if (!ints.Contains(0)) return ints;
+
+            return ints.Where(x => x == 0).Concat(ints.Where(x => x != 0)).ToArray();
+        }
+
+        public int[] Swap5ToZerosAndShiftToRight(int[] ints)
+        {
+            if (!ints.Contains(5)) return ints;
+
+            ints = ints.Select(x => x == 5 ? 0 : x).ToArray();
+
+            return ints.Where(x => x != 0).Concat(ints.Where(x => x == 0)).ToArray();
+        }
+
+        public int[] EvenNumbersBeforOdd(int[] ints)
+        {
+            return ints.Where(x => x % 2 == 0).Concat(ints.Where(x => x % 2 != 0)).ToArray();
+        }
+
+        public bool IsAllLargerThanBefore(int[] ints)
+        {
+            return ints.Zip(ints.Skip(1), (a, b) => a < b || a == b).All(x => x);
+        }
+
+        public bool Has15NextToAnother(int[] ints)
+        {
+            return ints.Zip(ints.Skip(1), (a, b) => a == 15 && b == 15).Any(x => x);
+        }
+
+        public int LargestAverageBetweenHalves(int[] ints)
+        {
+            int middle = ints.Length / 2;
+            return Math.Max(ints.Take(middle).Sum(), ints.TakeLast(middle).Sum());
+        }
+
+        public int StringLengthMatchingCount(string[] strings, int lengthCount)
+        {
+            return strings.Where(x => x.Length == lengthCount).Count();
+        }
+
+        public string[] FirstNStrings(string[] strings, int elementCount)
+        {
+            return strings.Take(elementCount).ToArray();
+        }
+
+        public string[] MatchesGivenLegth(string[] strings, int lengthCount)
+        {
+            return strings.Where(x => x.Length == lengthCount).ToArray();
+        }
+
+        public bool HasGivenValue(int input, int value)
+        {
+            return input.ToString().Contains(value.ToString());
+        }
+
+        public int[] ArrayOfOddNumbers(int[] ints, int length)
+        {
+            return ints.Where(x => x % 2 != 0).Take(length).ToArray();
+        }
+
+        public int[] ArrayMultiplier(int[] ints, int multiplier)
+        {
+            return ints.Select(x => x * multiplier).ToArray();
+        }
+
+        public int[] CubeOfArray(int[] ints)
+        {
+            return ints.Select(x => (int)Math.Pow(x, 3)).ToArray();
+        }
+
+        public string[] AddHashtag(string[] strings)
+        {
+            return strings.Select(x => "#" + x + "#").ToArray();
+        }
+
+        public string[] StringRepeat(string[] strings, int repeats)
+        {
+            return strings.Select(x => string.Concat(Enumerable.Repeat(x, repeats))).ToArray();
+        }
+
+        public int[] AddAndMultiply(int[] ints, int plus, int multiplier)
+        {
+            return ints.Select(x => (x + plus) * multiplier).ToArray();
+        }
+
+        public int[] RightmostValue(int[] ints)
+        {
+            return ints.Select(x => x % 10).ToArray();
+        }
+
+        public string[] AllToUpper(string[] strings)
+        {
+            return strings.Select(x => x.ToUpper()).ToArray();
+        }
+
+        public string[] RemoveTheA(string[] strings)
+        {
+            return strings.Select(x => x.Replace("a", "")).ToArray();
+        }
+
+        public int[] RemoveValueLessThanGiven(int[] ints, int givenValue)
+        {
+            return ints.Where(x => x > givenValue).ToArray();
+        }
+
+        public int[] RemoveEndingWith7(int[] ints)
+        {
+            return ints.Where(x => x.ToString().Last() != '7').ToArray();
         }
     }
 }
