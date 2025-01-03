@@ -1380,25 +1380,20 @@ namespace Basics.ExerciseTests
         }
 
         [TestMethod]
-        public async Task ShouldCheckIfItsOnlyNumbers()
+        [DataRow("123", true)]
+        [DataRow("123.33", true)]
+        [DataRow("33/33", false)]
+        [DataRow("234234d2", false)]
+
+        public async Task ShouldCheckIfItsOnlyNumbers(string input, bool expectedResult)
         {
             //Arrange
-            string input = "123";
-            string input2 = "123.33";
-            string input3 = "33/33";
-            string input4 = "234234d2";
 
             //Act
             bool result = await _exercise.CheckIfItsOnlyNumbers(input);
-            bool result2 = await _exercise.CheckIfItsOnlyNumbers(input2);
-            bool result3 = await _exercise.CheckIfItsOnlyNumbers(input3);
-            bool result4 = await _exercise.CheckIfItsOnlyNumbers(input4);
 
             //Assert
-            result.Should().BeTrue();
-            result2.Should().BeTrue();
-            result3.Should().BeFalse();
-            result4.Should().BeFalse();
+            result.Should().Be(expectedResult);
         }
 
         [TestMethod]
@@ -1414,32 +1409,24 @@ namespace Basics.ExerciseTests
             result.Should().BeEquivalentTo(new int[] { 2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31 });
         }
 
-        [TestMethod]
-        public async Task ShouldCheckEqualityOfValueAndType()
+        [DataTestMethod]
+        [DataRow("AAA", "BBB", false)]
+        [DataRow(true, false, false)]
+        [DataRow(true, "true", false)]
+        [DataRow(10, 10, true)]
+        [DataRow(10, 10.0, false)]
+        [DataRow(10, "10", false)]
+
+        public void ShouldCheckEqualityOfValueAndType(object value1, object value2, bool expectedOutcome)
         {
             //Arrange
-            object[] input = { "AAA", "BBB" };
-            object[] input2 = { true, false };
-            object[] input3 = { true, "true" };
-            object[] input4 = { 10, 10 };
-            object[] input5 = { 10, 10.0 };
-            object[] input6 = { 10, "10" };
+            var input = new object[] { value1, value2 };
 
             //Act
-            bool result = await _exercise.IsSameTypeAndValue(input);
-            bool result2 = await _exercise.IsSameTypeAndValue(input2);
-            bool result3 = await _exercise.IsSameTypeAndValue(input3);
-            bool result4 = await _exercise.IsSameTypeAndValue(input4);
-            bool result5 = await _exercise.IsSameTypeAndValue(input5);
-            bool result6 = await _exercise.IsSameTypeAndValue(input6);
-
+            bool result =  _exercise.IsSameTypeAndValue(input);
+            
             //Assert
-            result.Should().BeFalse();
-            result2.Should().BeFalse();
-            result3.Should().BeFalse();
-            result4.Should().BeTrue();
-            result5.Should().BeFalse();
-            result6.Should().BeFalse();
+            result.Should().Be(expectedOutcome);
         }
 
         [TestMethod]

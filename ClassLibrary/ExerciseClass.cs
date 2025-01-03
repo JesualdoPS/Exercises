@@ -4,7 +4,7 @@ namespace Basics.ClassLibrary
 {
     public class ExerciseClass
     {
-        private Dictionary<int, string> _romanCentury = new Dictionary<int, string>
+        private Dictionary<int, string> _romanNumbers = new Dictionary<int, string>
         {
             {1000, "M"}, {900, "CM"}, {500, "D"}, {400, "CD"},
             {100, "C"}, {90, "XC"}, {50, "L"}, {40, "XL"},
@@ -63,32 +63,29 @@ namespace Basics.ClassLibrary
         public async Task<string> NumbersInRows(string input)
         {
             var result = "";
-            for (int i = 1; i <= 2; i++)
-            {
-                result += string.Concat(Enumerable.Repeat(input + " ", 4)
-                    .ToArray()).Trim() + Environment.NewLine;
-                result += string.Concat(Enumerable.Repeat(input + "", 4)
-                    .ToArray()).Trim() + Environment.NewLine;
-            }
+           
+            result += string.Concat(Enumerable.Repeat(input + " ", 4)
+                .ToArray()).Trim() + Environment.NewLine;
+            result += string.Concat(Enumerable.Repeat(input + "", 4)
+                .ToArray()).Trim() + Environment.NewLine;
+            result += result;
             return result.Trim();
         }
 
         public async Task<string> NumbersInBlock(string input)
         {
-            var result = "";
-
-            result += string.Concat(Enumerable.Repeat(input, 3)
+            var block1 = string.Concat(Enumerable.Repeat(input, 3)
                 .ToArray()).Trim() + Environment.NewLine;
 
-            for (int i = 1; i <= 3; i++)
-            {
-                result += string.Concat(Enumerable.Repeat(input + " ", 2)
-                    .ToArray()).Trim() + Environment.NewLine;
-            }
+            
+            var block2 = string.Concat(Enumerable.Repeat(input + " ", 2)
+                .ToArray()).Trim() + Environment.NewLine;
+            
 
-            result += string.Concat(Enumerable.Repeat(input, 3)
+            var block3 = string.Concat(Enumerable.Repeat(input, 3)
                 .ToArray()).Trim() + Environment.NewLine;
 
+            var result = block1 + block2 + block2 + block2 + block3;
             return result.Trim();
         }
 
@@ -110,12 +107,18 @@ namespace Basics.ClassLibrary
 
         public async Task<string> SwapFirstAndLastCharacters(string input)
         {
-            if (input.Length <= 1) return input;
+            if (string.IsNullOrWhiteSpace(input)) return input;
 
             char[] chars = input.ToCharArray();
-            char temp = chars[0];
-            chars[0] = chars[input.Length - 1];
-            chars[input.Length - 1] = temp;
+            var first = 0;
+            var last = chars.Length - 1;
+
+            
+            var firstChar = chars[first];
+            var lastChar = chars[last];
+
+            chars[first] = lastChar;
+            chars[last] = firstChar;
 
             return new string(chars);
         }
@@ -148,26 +151,15 @@ namespace Basics.ClassLibrary
         public async Task<bool> FindThe20(int n1, int n2)
         {
             var values = new[] { n1, n2 };
-            if (values.Contains(20))
-            {
-                return true;
-            }
-            else
-            {
-                if (n1 + n2 == 20)
-                {
-                    return true;
-                }
-                else
-                {
-                    return false;
-                }
-            }
+            if (values.Contains(20)) return true;
+            if (n1 + n2 == 20) return true;
+            return false;
         }
+
         public async Task<bool> CheckIfItsWithin20(int input)
         {
-            var itsWithin = Math.Abs(input - 100) <= 20 || (Math.Abs(input - 200) <= 20);
-            return itsWithin;
+            var isWithin = Math.Abs(input - 100) <= 20 || (Math.Abs(input - 200) <= 20);
+            return isWithin;
         }
 
         public async Task<string> TurnLower(string text)
@@ -178,22 +170,25 @@ namespace Basics.ClassLibrary
 
         public async Task<string> FindLongestWord(string input)
         {
-            string longestWord = input.Split(' ').OrderByDescending(p => p.Length).First();
+            string longestWord = input
+                .Split(' ')
+                .OrderByDescending(p => p.Length)
+                .First();
 
             return longestWord;
         }
 
         public async Task<int[]> FindAllOddNumbers(int n1, int n2)
         {
-            List<int> oddList = new List<int>();
+            List<int> oddNumbers = new List<int>();
             for (int i = n1; i <= n2; i++)
             {
                 if (i % 2 != 0)
                 {
-                    oddList.Add(i);
+                    oddNumbers.Add(i);
                 }
             }
-            return oddList.ToArray();
+            return oddNumbers.ToArray();
         }
 
         public async Task<int> SumAllPrime(int n1, int n2)
@@ -278,8 +273,8 @@ namespace Basics.ClassLibrary
             int length = input.Length;
             string subString = input.Substring(length - 4);
 
-            string result = string.Concat(Enumerable.Repeat(subString, 4));
-            return result.Trim();
+            string result = string.Concat(Enumerable.Repeat(subString, 4)).Trim();
+            return result;
         }
 
         public async Task<bool> CheckIfItsMultiple(double n1, double n2)
@@ -319,7 +314,7 @@ namespace Basics.ClassLibrary
 
         public async Task<bool> StringFinder(string input, string lookingFor)
         {
-            return input.Contains(lookingFor) ? true : false;
+            return input.Contains(lookingFor);
         }
 
         public async Task<(int Largest, int Lowest)> FindLargestAndLowest(int n1, int n2, int n3)
@@ -333,25 +328,21 @@ namespace Basics.ClassLibrary
 
         public async Task<int> NextTo20(int n1, int n2)
         {
-            int value1 = 20 - n1;
-            int value2 = 20 - n2;
+            int value1 = Math.Abs(20 - n1);
+            int value2 = Math.Abs(20 - n2);
 
-            int result = (n1 == n2) ? 0 : ((value1 < value2) ? n1 : n2);
+            if (n1 == n2) return 0;
+
+            int result = ((value1 < value2) ? n1 : n2);
             return result;
         }
 
         public async Task<string> FirstFourUpperCase(string input)
         {
-            string result = "";
-            if (input.Length <= 4)
-            {
-                return input.ToUpper();
-            }
-            else
-            {
-                result = input.Substring(0, 4).ToUpper() + input.Substring(4);
-                return result;
-            }
+            if (input.Length <= 4) return input.ToUpper();
+
+            var result = input.Substring(0, 4).ToUpper() + input.Substring(4);
+            return result;
         }
 
         public async Task<string> RemoveOddNumberedCharacters(string input)
@@ -394,33 +385,25 @@ namespace Basics.ClassLibrary
 
         public async Task<int> SumArray(int[] array)
         {
-            int result = 0;
-            int count = array.Length;
-
-            for (int i = 0; i < count; i++)
-            {
-                result += array[i];
-            }
-
+            var result = array.Sum();
             return result;
         }
 
         public async Task<bool> FirstOrLastCompare(int[] array, int[] array2)
         {
-            return array[0] == array2[0] || array[^1] == array2[^1];
+            return array.First() == array2.First() || array.Last() == array2.Last();
         }
 
         public async Task<int[]> ArrayInverter(int[] array)
         {
-            int[] result = array.Reverse().ToArray();
+            var result = array.Reverse().ToArray();
 
             return result;
         }
 
         public async Task<int> LargestBetweenFirstAndLast(int[] array)
         {
-            int count = array.Length - 1;
-            int result = (array[0] > array[count]) ? array[0] : array[count];
+            var result = (array.First() > array.Last()) ? array.First() : array.Last();
 
             return result;
         }
@@ -439,26 +422,34 @@ namespace Basics.ClassLibrary
         {
 
             int century = (year + 99) / 100;
+            var centuryRemainder = century;
+            string romanCymbols = "";
 
-            string result = "";
-
-            foreach (var item in _romanCentury.OrderByDescending(x => x.Key))
+            var romanNumbers = _romanNumbers.OrderByDescending(x => x.Key);
+            foreach (var romanNumber in romanNumbers)
             {
-                while (century >= item.Key)
+                var romanCymbol = romanNumber.Value;
+                var decimalValue = romanNumber.Key;
+                while (centuryRemainder >= decimalValue)
                 {
-                    result += item.Value;
-                    century -= item.Key;
+                    romanCymbols += romanCymbol;
+                    centuryRemainder -= decimalValue;
                 }
             }
-            return result;
+            return romanCymbols;
         }
 
         public async Task<int> LargestProductToAdjacent(int[] array)
         {
+
             int product = 0;
             for (int i = 0; i < array.Length - 1; i++)
             {
-                product = ((array[i] * array[i + 1]) > product) ? (array[i] * array[i + 1]) : product;
+                var foo = (array[i] * array[i + 1]);
+                if ( foo > product) 
+                {
+                    product = foo;
+                }
             }
 
             return product;
@@ -467,7 +458,7 @@ namespace Basics.ClassLibrary
         public async Task<bool> IsPalindrome(string input)
         {
             string reverseInput = new string(input.Reverse().ToArray());
-            bool result = (reverseInput == input) ? true : false;
+            bool result = reverseInput == input;
 
             return result;
         }
@@ -487,7 +478,7 @@ namespace Basics.ClassLibrary
 
         public async Task<string> FileNameFinder(string filePath)
         {
-            string fileName = filePath.Split('\\').Last();
+            string fileName = Path.GetFileName(filePath);
 
             return fileName;
         }
@@ -524,15 +515,12 @@ namespace Basics.ClassLibrary
 
         public async Task<int> SpecificCharacterCounter(string input, char upperCase, char lowerCase)
         {
-            char[] charList = input.Substring(0, input.Length - 1).ToArray();
-            int result = 0;
-
-            foreach (var item in charList)
-            {
-                result = (item == upperCase || item == lowerCase) ? result + 1 : result + 0;
-            }
-
-            return result;
+            var count = input
+                .Substring(0, input.Length - 1)
+                .Where(x => x == upperCase || x == lowerCase)
+                .Count();
+            
+            return count;
         }
 
         public async Task<bool> CheckIfItsOnlyUpperOrLowerCase(string input)
@@ -565,13 +553,14 @@ namespace Basics.ClassLibrary
         public async Task<bool> WholeNumberAverage(int[] array)
         {
             double average = array.Average();
+            var isWholeNumberEqualToAverage = average == (int)average; ;
 
-            return (average == (int)average) ? true : false;
+            return isWholeNumberEqualToAverage;
         }
 
         public async Task<string> OrderByAlphabetical(string input)
         {
-            string result = new string(input.OrderBy(x => x).ToArray());
+            string result = new(input.OrderBy(x => x).ToArray());
             return result;
         }
 
@@ -613,21 +602,19 @@ namespace Basics.ClassLibrary
 
         public async Task<bool> SwapAndCheckTheLargest(int input)
         {
-            bool result = ((input % 10 * 10) + (input / 10)) > input ? true : false;
+            bool result = ((input % 10 * 10) + (input / 10)) > input;
 
             return result;
         }
 
         public async Task<string> NonLetterRemoval(string input)
         {
-            string result = "";
-            foreach (char c in input)
-            {
-                if (char.IsLetter(c))
-                {
-                    result += c;
-                }
-            }
+            var result = string.Join("", 
+                input
+                    .ToCharArray()
+                    .Where(x => char.IsLetter(x))
+            );
+
             return result;
         }
 
@@ -639,7 +626,10 @@ namespace Basics.ClassLibrary
 
         public async Task<int[]> LowerCaseIndexer(string input)
         {
-            var result = input.Select((x, i) => i).Where(i => char.IsLower(input[i])).ToArray();
+            var result = input
+                .Select((x, i) => i)
+                .Where(i => char.IsLower(input[i]))
+                .ToArray();
             return result;
         }
 
@@ -787,11 +777,16 @@ namespace Basics.ClassLibrary
             return primeList.ToArray();
         }
 
-        public async Task<bool> IsSameTypeAndValue(object[] input)
+        public bool IsSameTypeAndValue(object[] input)
         {
-            bool isEqual = input[0].GetType().Equals(input[1].GetType());
+            var input1 = input[0];
+            var input2 = input[1];
+            var type1 = input1.GetType();
+            var type2 = input2.GetType();
 
-            return isEqual ? input[0].ToString() == input[1].ToString() : false;
+            var result = type1.Equals(type2) && input1.Equals(input2);
+            
+            return result;
         }
 
         public async Task<string> IdentityMatrixCreator(int input)
