@@ -1,6 +1,4 @@
 ﻿using UnitsNet;
-using System.Globalization;
-using System.Text.RegularExpressions;
 
 namespace DataTypeLibrary
 {

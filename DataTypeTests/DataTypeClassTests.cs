@@ -1,8 +1,7 @@
-using Microsoft.VisualStudio.TestTools.UnitTesting;
-using FluentAssertions;
 using DataTypeLibrary;
+using FluentAssertions;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 using UnitsNet;
-using System.Configuration;
 
 namespace DataTypeTests
 {
