@@ -5,7 +5,7 @@ namespace BasicAlgorithm.BasicAlgorithmClass
 {
     public class AlgorithmClass
     {
-        public int SumOfNumbersInArrayOrTrupleIfEqual(int[] input)
+        public int SumOfNumbersInArrayOrTripleIfEqual(int[] input)
         {
             return input.Distinct().Count() == 1 ? input.Sum() * 3 : input.Take(2).Sum();
         }

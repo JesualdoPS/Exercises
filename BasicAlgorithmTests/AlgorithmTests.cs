@@ -22,7 +22,7 @@ namespace BasicAlgorithm.BasicAlgorithmTests
         public void ShouldSumIntegersFromArrayOrTripleIfItsEqual(int n1, int n2, int expectedResult)
         {
             //Act
-            int result = _exercise.SumOfNumbersInArrayOrTrupleIfEqual(new[] { n1, n2 });
+            int result = _exercise.SumOfNumbersInArrayOrTripleIfEqual(new[] { n1, n2 });
 
             //Assert
             result.Should().Be(expectedResult);
