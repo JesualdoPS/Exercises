@@ -1,4 +1,3 @@
-using System.Transactions;
 using ConditionalLibrary;
 using FluentAssertions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
