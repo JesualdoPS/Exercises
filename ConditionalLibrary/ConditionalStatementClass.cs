@@ -1,13 +1,25 @@
-﻿
-
-
-using System.Net.Http.Headers;
-using static System.Runtime.InteropServices.JavaScript.JSType;
+﻿using System.Reflection.Metadata.Ecma335;
+using UnitsNet;
 
 namespace ConditionalLibrary
 {
     public class ConditionalStatementClass
     {
+        public const double PI = 3.14;
+
+        private static readonly Dictionary<int, string> digitName = new()
+        {
+            {0, "Zero"}, {1, "One"}, {2,"Two"}, {3,"Three"}, {4, "Four"},
+            {5, "Five"}, {6, "Six"}, {7, "Seven" }, {8, "Eigth"}, {9, "Nine"}
+        };
+
+        private static readonly Dictionary<int, string> monthName = new()
+        {
+            {1, "January"}, {2, "February"}, {3, "March"}, {4, "April"},
+            {5, "May"}, {6, "June"}, {7, "July"}, {8, "August"},
+            {9, "September"}, {10, "October"}, {11, "November"}, {12, "December"}
+        };
+
         public bool AreEqual(int n1, int n2)
         {
             return n1 == n2;
@@ -95,13 +107,14 @@ namespace ConditionalLibrary
                 : percentage >= 40 ? "Pass"
                 : "Fail";
 
-            return $"Roll No: {roll}\r\nName: {name}" +
-                $"\r\nMarks in Physics: {physics}" +
-                $"\r\nMarks in Chemistry: {chemistry}" +
-                $"\r\nMarks in Computer Application: {compApplication}" +
-                $"\r\nTotal Marks: {totalMarks}" +
-                $"\r\nPercentage: {percentage}" +
-                $"\r\nDivision: {division}";
+            return $"Roll No: {roll}" +
+                $"\nName: {name}" +
+                $"\nMarks in Physics: {physics}" +
+                $"\nMarks in Chemistry: {chemistry}" +
+                $"\nMarks in Computer Application: {compApplication}" +
+                $"\nTotal Marks: {totalMarks}" +
+                $"\nPercentage: {percentage}" +
+                $"\nDivision: {division}";
         }
 
         public string WeatherMessage(double temperature)
@@ -112,6 +125,127 @@ namespace ConditionalLibrary
                 : temperature >= 10 ? "Cold weather"
                 : temperature >= 0 ? "Very cold weather"
                 : "Freezing weather";
+        }
+
+        public string TriangleType(int side1, int side2, int side3)
+        {
+            if (side1 == side2 && side2 == side3) return "Equilateral";
+
+            return new[] { side1, side2, side3 }.Distinct().Count() == 2 ? "Isoceles" : "Scalene";
+        }
+
+        public string IsTriangle(int angleA, int angleB, int angleC)
+        {
+            return angleA + angleB + angleC == 180 ? "The triangle is valid" : "The triangle is not valid";
+        }
+
+        public string IsVowelOrConsoant(char input)
+        {
+            string vowel = "AEIOUaeiou";
+
+            return vowel.Contains(input) ? "Is vowel" : "Is consoant";
+        }
+
+        public string CalculateProfit(int costPrice, int sellPrice)
+        {
+            int result = sellPrice - costPrice;
+            return result >= 0 ? $"Profit of {result}" : $"Loss of {result}";
+        }
+
+        public string ElectricityBill(int id, string name, int unitsConsumed)
+        {
+            double chargePerUnit = unitsConsumed switch
+            {
+                <= 200 => 1.2,
+                <= 400 => 1.5,
+                <= 600 => 1.8,
+                _ => 2.0
+            };
+
+            double amountCharges = unitsConsumed * chargePerUnit;
+            double surchageAmount = amountCharges > 400 ? amountCharges * 0.15 : 0;
+
+            return $"Id: {id}" +
+                $"\nName: {name}" +
+                $"\nUnits consumed: {unitsConsumed}" +
+                $"\nAmount charges: {amountCharges}" +
+                $"\nSurcharge amount: {surchageAmount}" +
+                $"\nNet amoun to be paid: {amountCharges + surchageAmount}";
+        }
+
+        public string GradeDescription(char grade)
+        {
+            return grade switch
+            {
+                'E' => "Excelent",
+                'V' => "Very good",
+                'G' => "Good",
+                'A' => "Average",
+                'F' => "Fail",
+                _ => throw new ArgumentException("Invalid grade")
+            };
+        }
+
+        public string DayName(int dayNumber)
+        {
+            return dayNumber switch
+            {
+                1 => "Sunday",
+                2 => "Monday",
+                3 => "Tuesday",
+                4 => "Wednesday",
+                5 => "Thursday",
+                6 => "Friday",
+                7 => "Saturday",
+                _ => throw new ArgumentException("Invalid day number")
+            };
+        }
+
+        public string DigitName(int digit)
+        {
+            if (digit.ToString().Length > 1) return "Invalid digit";
+
+            return digitName[digit];
+        }
+
+        public string MonthName(int monthNumber)
+        {
+            if (monthNumber > 12) return "Not a valid month";
+
+            return monthName[monthNumber];
+        }
+
+        public string DaysInSpecificMonth(int month)
+        {
+            if (month > 12) return "Not a valid month";
+
+            return $"{monthName[month]} has {DateTime.DaysInMonth(2025, month)} days";
+        }
+
+        public Area AreaOfShapes(string input)
+        {
+            string[] parts = input.Split(',');
+
+            return parts[0] switch
+            {
+                "Circle" => Area.FromSquareCentimeters(PI * Math.Pow(Convert.ToInt32(parts[1]), 2)),
+                "Rectangle" => Area.FromSquareCentimeters(Convert.ToInt32(parts[1]) * Convert.ToInt32(parts[2])),
+                "Triangle" => Area.FromSquareCentimeters(0.5 * Convert.ToInt32(parts[1]) * Convert.ToInt32(parts[2])),
+                _ => throw new ArgumentException("Its not a valid shape")
+            };
+        }
+
+        public double Calculator(int option, double n1, double n2)
+        {           
+            return option switch
+            {
+                1 => n1 + n2,
+                2 => n1 - n2,
+                3 => n1 * n2,
+                4 => n1 / n2,
+                5 => Math.Pow(n1, n2),
+                _ => 0
+            };
         }
     }
 }

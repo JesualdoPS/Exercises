@@ -6,7 +6,7 @@ namespace DataTypeLibrary
     {
         public int UserId = 1250;
         public string Password = "QuotationFactory123";
-        public double PI = 3.14;
+        public const double PI = 3.14;
         public string AccessMethod(int userId, string password, int tryCount = 0)
         {
             const int maxTries = 3;

@@ -1,7 +1,8 @@
-using Microsoft.VisualStudio.TestTools.UnitTesting;
-using FluentAssertions;
+using System.Transactions;
 using ConditionalLibrary;
-using System.Threading;
+using FluentAssertions;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
+using UnitsNet;
 
 namespace ConditionalTests
 {
@@ -171,13 +172,14 @@ namespace ConditionalTests
             string result = _exercises.CalculateTheTotalPercentageAndDivision(roll, name, physics, chemistry, compApplication);
 
             //Assert
-            result.Should().Be("Roll No: 784\r\nName: James" +
-                "\r\nMarks in Physics: 70" +
-                "\r\nMarks in Chemistry: 80" +
-                "\r\nMarks in Computer Application: 90" +
-                "\r\nTotal Marks: 240" +
-                "\r\nPercentage: 80" +
-                "\r\nDivision: First");
+            result.Should().Be("Roll No: 784" +
+                "\nName: James" +
+                "\nMarks in Physics: 70" +
+                "\nMarks in Chemistry: 80" +
+                "\nMarks in Computer Application: 90" +
+                "\nTotal Marks: 240" +
+                "\nPercentage: 80" +
+                "\nDivision: First");
         }
 
         [TestMethod]
@@ -188,13 +190,14 @@ namespace ConditionalTests
             string result = _exercises.CalculateTheTotalPercentageAndDivision(roll, name, physics, chemistry, compApplication);
 
             //Assert
-            result.Should().Be("Roll No: 784\r\nName: James" +
-                "\r\nMarks in Physics: 70" +
-                "\r\nMarks in Chemistry: 60" +
-                "\r\nMarks in Computer Application: 80" +
-                "\r\nTotal Marks: 210" +
-                "\r\nPercentage: 70" +
-                "\r\nDivision: Second");
+            result.Should().Be("Roll No: 784" +
+                "\nName: James" +
+                "\nMarks in Physics: 70" +
+                "\nMarks in Chemistry: 60" +
+                "\nMarks in Computer Application: 80" +
+                "\nTotal Marks: 210" +
+                "\nPercentage: 70" +
+                "\nDivision: Second");
         }
 
         [TestMethod]
@@ -205,13 +208,14 @@ namespace ConditionalTests
             string result = _exercises.CalculateTheTotalPercentageAndDivision(roll, name, physics, chemistry, compApplication);
 
             //Assert
-            result.Should().Be("Roll No: 784\r\nName: James" +
-                "\r\nMarks in Physics: 50" +
-                "\r\nMarks in Chemistry: 55" +
-                "\r\nMarks in Computer Application: 60" +
-                "\r\nTotal Marks: 165" +
-                "\r\nPercentage: 55" +
-                "\r\nDivision: Pass");
+            result.Should().Be("Roll No: 784" +
+                "\nName: James" +
+                "\nMarks in Physics: 50" +
+                "\nMarks in Chemistry: 55" +
+                "\nMarks in Computer Application: 60" +
+                "\nTotal Marks: 165" +
+                "\nPercentage: 55" +
+                "\nDivision: Pass");
         }
 
         [TestMethod]
@@ -222,13 +226,14 @@ namespace ConditionalTests
             string result = _exercises.CalculateTheTotalPercentageAndDivision(roll, name, physics, chemistry, compApplication);
 
             //Assert
-            result.Should().Be("Roll No: 784\r\nName: James" +
-                "\r\nMarks in Physics: 40" +
-                "\r\nMarks in Chemistry: 30" +
-                "\r\nMarks in Computer Application: 35" +
-                "\r\nTotal Marks: 105" +
-                "\r\nPercentage: 35" +
-                "\r\nDivision: Fail");
+            result.Should().Be("Roll No: 784" +
+                "\nName: James" +
+                "\nMarks in Physics: 40" +
+                "\nMarks in Chemistry: 30" +
+                "\nMarks in Computer Application: 35" +
+                "\nTotal Marks: 105" +
+                "\nPercentage: 35" +
+                "\nDivision: Fail");
         }
 
         [TestMethod]
@@ -242,6 +247,213 @@ namespace ConditionalTests
         {
             //Act
             string result = _exercises.WeatherMessage(temperature);
+
+            //Assert
+            result.Should().Be(expectedResult);
+        }
+
+        [TestMethod]
+        [DataRow(50, 50, 110, "Isoceles")]
+        [DataRow(50, 60, 120, "Scalene")]
+        [DataRow(60, 60, 60, "Equilateral")]
+        public void ShouldReturnTheTriangleType(int side1, int side2, int side3, string expectedResult)
+        {
+            //Act
+            string result = _exercises.TriangleType(side1, side2, side3);
+
+            //Assert
+            result.Should().Be(expectedResult);
+        }
+
+        [TestMethod]
+        [DataRow(45, 55, 65, "The triangle is not valid")]
+        [DataRow(90, 45, 45, "The triangle is valid")]
+        public void ShouldCheckIfIsATriangle(int angleA, int angleB, int angleC, string expectedResult)
+        {
+            //Act
+            string result = _exercises.IsTriangle(angleA, angleB, angleC);
+
+            //Assert
+            result.Should().Be(expectedResult);
+        }
+
+        [TestMethod]
+        [DataRow('k', "Is consoant")]
+        [DataRow('a', "Is vowel")]
+        public void ShouldCheckIfItsAVowelOrConsoant(char input, string expectedResult)
+        {
+            //Act
+            string result = _exercises.IsVowelOrConsoant(input);
+
+            //Assert
+            result.Should().Be(expectedResult);
+        }
+
+        [TestMethod]
+        [DataRow(500, 700, "Profit of 200")]
+        [DataRow(500, 300, "Loss of -200")]
+        public void ShouldReturnProfitOrLoss(int costPrice, int sellPrice, string expectedResult)
+        {
+            //Act
+            string result = _exercises.CalculateProfit(costPrice, sellPrice);
+
+            //Assert
+            result.Should().Be(expectedResult);
+        }
+
+        [TestMethod]
+        [DataRow(1001, "James", 190, 228, 0, 228)]
+        [DataRow(1002, "Mark", 260, 390, 0, 390)]
+        [DataRow(1003, "Cesar", 510, 918, 137.7, 1055.7)]
+        [DataRow(1004, "Billy", 800, 1600, 240, 1840)]
+        public void ShouldReturnElectricityBill(int Id, string name, int unitsConsumed, double amountCharge, double surcharge, double valuePaid)
+        {
+            //Act
+            string result = _exercises.ElectricityBill(Id, name, unitsConsumed);
+
+            //Assert
+            result.Should().Be($"Id: {Id}" +
+                $"\nName: {name}" +
+                $"\nUnits consumed: {unitsConsumed}" +
+                $"\nAmount charges: {amountCharge}" +
+                $"\nSurcharge amount: {surcharge}" +
+                $"\nNet amoun to be paid: {valuePaid}");
+        }
+
+        [TestMethod]
+        [DataRow('E', "Excelent")]
+        [DataRow('V', "Very good")]
+        [DataRow('G', "Good")]
+        [DataRow('A', "Average")]
+        [DataRow('F', "Fail")]
+        public void ShouldReturnGradeDescription(char grade, string expectedResult)
+        {
+            //Act
+            string result = _exercises.GradeDescription(grade);
+
+            //Assert
+            result.Should().Be(expectedResult);
+        }
+
+        [TestMethod]
+        public void ShouldReturnExceptionOnGradeDescription()
+        {
+            //Arrange
+            char grade = 'C';
+
+            //Act
+            Action action = () => _exercises.GradeDescription(grade);
+
+            //Assert
+            action.Should().Throw<ArgumentException>("Invalid grade");
+        }
+
+        [TestMethod]
+        [DataRow(1, "Sunday")]
+        [DataRow(2, "Monday")]
+        [DataRow(3, "Tuesday")]
+        [DataRow(4, "Wednesday")]
+        [DataRow(5, "Thursday")]
+        [DataRow(6, "Friday")]
+        [DataRow(7, "Saturday")]
+        public void ShouldReturnDayName(int dayNumber, string expectedResult)
+        {
+            //Act
+            string result = _exercises.DayName(dayNumber);
+
+            //Assert
+            result.Should().Be(expectedResult);
+        }
+
+        [TestMethod]
+        public void ShouldReturnDayNameArgumentException()
+        {
+            //Arrange
+            int dayNumber = 8;
+
+            //Act
+            Action action = () => _exercises.DayName(dayNumber);
+
+            //Assert
+            action.Should().Throw<ArgumentException>("Invalid day number");
+        }
+
+        [TestMethod]
+        [DataRow(1, "One")]
+        [DataRow(4, "Four")]
+        [DataRow(7, "Seven")]
+        [DataRow(11, "Invalid digit")]
+        public void ShouldReturnDigitName(int digit, string expectedResult)
+        {
+            //Act
+            string result = _exercises.DigitName(digit);
+
+            //Assert
+            result.Should().Be(expectedResult);
+        }
+
+        [TestMethod]
+        [DataRow(4, "April")]
+        [DataRow(8, "August")]
+        [DataRow(12, "December")]
+        [DataRow(15, "Not a valid month")]
+        public void ShouldReturnMonthName(int monthNumber, string expectedResult)
+        {
+            //Act
+            string result = _exercises.MonthName(monthNumber);
+
+            //Assert
+            result.Should().Be(expectedResult);
+        }
+
+        [TestMethod]
+        [DataRow(7, "July has 31 days")]
+        public void Should(int month, string expectedResult)
+        {
+            //Act
+            string result = _exercises.DaysInSpecificMonth(month);
+
+            //Assert
+            result.Should().Be(expectedResult);
+        }
+
+        [TestMethod]
+        [DataRow("Circle, 5", 78.5)]
+        [DataRow("Rectangle, 5, 5", 25)]
+        [DataRow("Triangle, 10, 5", 25)]
+        public void ShouldCalculateAreaBasedOnMenu(string input, double expectedResult)
+        {
+            //Act
+            Area result = _exercises.AreaOfShapes(input);
+
+            //Assert
+            result.Should().Be(Area.FromSquareCentimeters(expectedResult));
+        }
+
+        [TestMethod]
+        public void ShouldThrowExceptionWhenCalculatingAreaBasedOnMenu()
+        {
+            //Arrange
+            string input = "Sphere,5";
+
+            //Act
+            Action action = () => _exercises.AreaOfShapes(input);
+
+            //Assert
+            action.Should().Throw<ArgumentException>("Its not a valid shape");
+        }
+
+        [TestMethod]
+        [DataRow(1, 10, 2, 12)]
+        [DataRow(2, 10, 2, 8)]
+        [DataRow(3, 10, 2, 20)]
+        [DataRow(4, 10, 2, 5)]
+        [DataRow(5, 10, 2, 100)]
+        [DataRow(6, 10, 10, 0)]
+        public void ShouldCalculateBasedOnMenu(int option, double n1, double n2, double expectedResult)
+        {
+            //Act
+            double result = _exercises.Calculator(option, n1, n2);
 
             //Assert
             result.Should().Be(expectedResult);
