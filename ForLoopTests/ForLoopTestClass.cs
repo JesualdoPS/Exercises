@@ -35,5 +35,12 @@ namespace ForLoopTests
             //Assert
             result.Should().Be(expectedResult);
         }
+
+        [TestMethod]
+        [DataRow()]
+        public void Should()
+        {
+
+        }
     }
 }

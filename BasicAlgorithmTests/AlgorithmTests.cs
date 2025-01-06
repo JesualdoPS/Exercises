@@ -435,39 +435,18 @@ namespace BasicAlgorithm.BasicAlgorithmTests
             result.Should().Be(expectedResult);
         }
 
-        /// <summary>
-        /// #############################################################################
-        /// TO DO: Ask for refactoring the following test with DataRow
-        /// Since the arrays doesn't have the same size, how could I implement it?
-        /// Obs.: Tried using params int[] values, but without success
-        /// </summary>
-
         [TestMethod]
-        public void ShouldCheckFirstFourElements()
+        [DataRow(new[] { 1, 2, 9, 3 }, 3, true)]
+        [DataRow(new[] { 1, 2, 3, 4, 5, 6 }, 6, false)]
+        [DataRow(new[] { 1, 2, 2, 3 }, 9, false)]
+        public void ShouldCheckFirstFourElements(int[] array, int check, bool expectedResult)
         {
-            //Arrange
-            int[] array = { 1, 2, 9, 3 };
-            int[] array2 = { 1, 2, 3, 4, 5, 6 };
-            int[] array3 = { 1, 2, 2, 3 };
-
-            int check = 3;
-            int check2 = 6;
-            int check3 = 9;
-
             //Act
             bool result = _exercise.IsInTheFirstFour(array, check);
-            bool result2 = _exercise.IsInTheFirstFour(array2, check2);
-            bool result3 = _exercise.IsInTheFirstFour(array3, check3);
 
             //Assert
-            result.Should().BeTrue();
-            result2.Should().BeFalse();
-            result3.Should().BeFalse();
+            result.Should().Be(expectedResult);
         }
-
-        /// <summary>
-        /// #############################################################################
-        /// </summary>
 
         [TestMethod]
         [DataRow(1, 1, 2, 3, 1, true)]
@@ -524,50 +503,31 @@ namespace BasicAlgorithm.BasicAlgorithmTests
             result.Should().Be(expectedResult);
         }
 
-        /// <summary>
-        /// #############################################################################
-        /// </summary>
         [TestMethod]
-        public void ShouldCount5NextToEachOther()
+        [DataRow(new[] { 5, 5, 2 }, 1)]
+        [DataRow(new[] { 5, 5, 2, 5, 5 }, 2)]
+        [DataRow(new[] { 5, 6, 2, 9 }, 1)]
+        public void ShouldCount5NextToEachOther(int[] input, int expectedResult)
         {
-            //Arrange
-            int[] input = { 5, 5, 2 };
-            int[] input2 = { 5, 5, 2, 5, 5 };
-            int[] input3 = { 5, 6, 2, 9 };
-
             //Act
             int result = _exercise.Count5NextToEachOther(input);
-            int result2 = _exercise.Count5NextToEachOther(input2);
-            int result3 = _exercise.Count5NextToEachOther(input3);
 
             //Assert
-            result.Should().Be(1);
-            result2.Should().Be(2);
-            result3.Should().Be(1);
+            result.Should().Be(expectedResult);
         }
 
         [TestMethod]
-        public void ShouldCheckTripleInArray()
+        [DataRow(new[] { 1, 1, 2, 2, 1 }, false)]
+        [DataRow(new[] { 1, 1, 2, 1, 2, 3 }, false)]
+        [DataRow(new[] { 1, 1, 1, 2, 2, 2, 1 }, true)]
+        public void ShouldCheckTripleInArray(int[] input, bool expectedResult)
         {
-            //Arrange
-            int[] input = { 1, 1, 2, 2, 1 };
-            int[] input2 = { 1, 1, 2, 1, 2, 3 };
-            int[] input3 = { 1, 1, 1, 2, 2, 2, 1 };
-
             //Act
             bool result = _exercise.HasTripleValue(input);
-            bool result2 = _exercise.HasTripleValue(input2);
-            bool result3 = _exercise.HasTripleValue(input3);
 
             //Assert
-            result.Should().BeFalse();
-            result2.Should().BeFalse();
-            result3.Should().BeTrue();
+            result.Should().Be(expectedResult);
         }
-
-        /// <summary>
-        /// #############################################################################
-        /// </summary>
 
         [TestMethod]
         [DataRow(12, 17, 29)]
@@ -1355,38 +1315,20 @@ namespace BasicAlgorithm.BasicAlgorithmTests
             result.Should().Equal(new[] { n3, n4, n5 });
         }
 
-        /// <summary>
-        /// #############################################################################
-        /// </summary>
-
         [TestMethod]
-        public void ShouldReturnLargestBetweenFirstLastAndMiddleElements()
+        [DataRow(new[] {1}, 1)]
+        [DataRow(new[] { 1, 2, 9 }, 9)]
+        [DataRow(new[] { 1, 2, 9, 3, 3 }, 9)]
+        [DataRow(new[] { 1, 2, 3, 4, 5, 6, 7 }, 7)]
+        [DataRow(new[] { 1, 2, 2, 3, 7, 8, 9, 10, 6, 5, 4 }, 8)]
+        public void ShouldReturnLargestBetweenFirstLastAndMiddleElements(int[] input, int expectedResult)
         {
-            //Arrange
-            int[] input = { 1 };
-            int[] input2 = { 1, 2, 9 };
-            int[] input3 = { 1, 2, 9, 3, 3 };
-            int[] input4 = { 1, 2, 3, 4, 5, 6, 7 };
-            int[] input5 = { 1, 2, 2, 3, 7, 8, 9, 10, 6, 5, 4 };
-
             //Act
             int result = _exercise.LargestElementFromFirstMiddleAndLast(input);
-            int result2 = _exercise.LargestElementFromFirstMiddleAndLast(input2);
-            int result3 = _exercise.LargestElementFromFirstMiddleAndLast(input3);
-            int result4 = _exercise.LargestElementFromFirstMiddleAndLast(input4);
-            int result5 = _exercise.LargestElementFromFirstMiddleAndLast(input5);
 
             //Assert
-            result.Should().Be(1);
-            result2.Should().Be(9);
-            result3.Should().Be(9);
-            result4.Should().Be(7);
-            result5.Should().Be(8);
+            result.Should().Be(expectedResult);
         }
-
-        /// <summary>
-        /// #############################################################################
-        /// </summary>
 
         [TestMethod]
         [DataRow(1, 5, 7, 9, 11, 13)]
