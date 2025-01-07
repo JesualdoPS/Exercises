@@ -162,5 +162,248 @@ namespace ForLoopTests
             //Assert
             result.Should().Be("   1   \n  2 3  \n 4 5 6 \n7 8 9 10");
         }
+
+        [TestMethod]
+        [DataRow(4)]
+        public void ShouldCreateAnAsteriscPiramid(int rows)
+        {
+            //Act
+            string result = _exercises.PiramidOfAsteriscs(rows);
+
+            //Assert
+            result.Should().Be("   *   \n  * *  \n * * * \n* * * *");
+        }
+
+        [TestMethod]
+        [DataRow(5, 120)]
+        [DataRow(8, 40320)]
+        public void Should(int input, int expectedResult)
+        {
+            //Act
+            int result = _exercises.FactorialNumber(input);
+
+            //Assert
+            result.Should().Be(expectedResult);
+        }
+
+        [TestMethod]
+        [DataRow(5, "The first 5 natural numbers are [2,4,6,8,10] and their sum is 30")]
+        [DataRow(8, "The first 8 natural numbers are [2,4,6,8,10,12,14,16] and their sum is 72")]
+        public void ShouldReturnNTermsOfNaturalNumbersAndTheirSum(int input, string expectedResult)
+        {
+            //Act
+            string result = _exercises.EvenNaturalNumbersAndSum(input);
+
+            //Assert
+            result.Should().Be(expectedResult);
+        }
+
+        [TestMethod]
+        [DataRow(4)]
+        public void ShouldCreateAPiramidMadeOfRepetitiveNumbers(int rows)
+        {
+            //Act
+            string result = _exercises.PiramidOfRepetitiveNumbers(rows);
+
+            //Assert
+            result.Should().Be("   1   \n  2 2  \n 3 3 3 \n4 4 4 4");
+        }
+
+        [TestMethod]
+        [DataRow(5, 2.283)]
+        public void ShouldCalculateHarmonicSeries(double input, double expectedResult)
+        {
+            //Act
+            double result = _exercises.CalculateHarmonicSeries(input);
+
+            //Assert
+            result.Should().Be(expectedResult);
+        }
+
+        [TestMethod]
+        [DataRow(3)]
+        public void ShouldCreateAPiramidOfAsteriscWithNoSpaces(int rows)
+        {
+            //Act
+            string result = _exercises.PiramidOfOddAsteriscs(rows);
+
+            //Assert
+            result.Should().Be("   *   \n  ***  \n ***** ");
+        }
+
+        [TestMethod]
+        [DataRow(9, 5, 111105)]
+        [DataRow(2, 6, 246912)]
+        public void ShouldDisplayTheSumOfNRepetitiveNumbers(double input, double repetitions, double expectedResult)
+        {
+            //Act
+            double result = _exercises.SumOfRepetitions(input, repetitions);
+
+            //Assert
+            result.Should().Be(expectedResult);
+        }
+
+        [TestMethod]
+        [DataRow(5)]
+        public void ShouldDisplayFloydsTriangle(int rows)
+        {
+            //Act
+            string result = _exercises.FloydsTriangle(rows);
+
+            //Assert
+            result.Should().Be("1\n01\n101\n0101\n10101");
+        }
+
+        [TestMethod]
+        [DataRow(3, 5, 16.375)]
+        [DataRow(8, 12, 2647.317)]
+        public void ShouldCalculateASerieWithFactorialDenominator(double input, double terms, double expectedResult)
+        {
+            //Act
+            double result = _exercises.FactorialDenominator(input, terms);
+
+            //Assert
+            result.Should().Be(expectedResult);
+        }
+
+        [TestMethod]
+        [DataRow(2, 5, 410)]
+        [DataRow(3, 6, -159432)]
+        public void ShouldCalculateAnIrregularSeries(double input, double terms, double expectedResult)
+        {
+            //Act
+            double result = _exercises.IrregularSeriesSum(input, terms);
+
+            //Assert
+            result.Should().Be(expectedResult);
+        }
+
+        [TestMethod]
+        [DataRow(5, "The first 5 natural squares are [1,4,9,16,25] and their sum is 55")]
+        [DataRow(10, "The first 10 natural squares are [1,4,9,16,25,36,49,64,81,100] and their sum is 385")]
+        public void Should(int input, string expectedResult)
+        {
+            //Act
+            string result = _exercises.NaturalSquareSum(input);
+
+            //Assert
+            result.Should().Be(expectedResult);
+        }
+
+        [TestMethod]
+        [DataRow(5, 12345)]
+        [DataRow(7, 1234567)]
+        public void ShouldReturnOfNOnes(int input, double expectedResult)
+        {
+            //Act
+            double result = _exercises.CalculateNOnes(input);
+
+            //Assert
+            result.Should().Be(expectedResult);
+        }
+
+        [TestMethod]
+        [DataRow(56, false)]
+        [DataRow(28, true)]
+        public void ShouldCheckIfItsAPerfectNumber(double input, bool expectedResult)
+        {
+            //Act
+            bool result = _exercises.IsPerfect(input);
+
+            //Assert
+            result.Should().Be(expectedResult);
+        }
+
+        [TestMethod]
+        [DataRow(1, 50, new int[] { 6, 28 })]
+        public void ShouldFindThePerfectNumberInARow(int start, int end, int[] expectedResult)
+        {
+            //Act
+            List<int> result = _exercises.PerfectNumbersList(start, end);
+
+            //Assert
+            result.Should().Equal(expectedResult);
+        }
+
+        [TestMethod]
+        [DataRow(153, true)]
+        [DataRow(245, false)]
+        [DataRow(2, false)]
+        public void ShouldCheckIfItsAnArmstrongNumber(double input, bool expectedResult)
+        {
+            //Act
+            bool result = _exercises.IsArmstrong(input);
+
+            //Assert
+            result.Should().Be(expectedResult);
+        }
+
+        [TestMethod]
+        [DataRow(1, 1000, new int[] { 1, 153, 370, 371, 407 })]
+        public void ShouldFindTheArmstrongNumberInARow(int start, int end, int[] expectedResult)
+        {
+            //Act
+            List<int> result = _exercises.ArmstrongList(start, end);
+
+            //Assert
+            result.Should().Equal(expectedResult);
+        }
+
+        [TestMethod]
+        [DataRow(9)]
+        public void ShouldReturnAnAsteriscDiamond(int midRow)
+        {
+            //Act
+            string result = _exercises.AsteriscDiamond(midRow);
+
+            //Assert
+            result.Should().Be($"    *    \n   ***   \n  *****  \n ******* \n*********" +
+                $"\n ******* \n  *****  \n   ***   \n    *    ");
+        }
+
+        [TestMethod]
+        [DataRow(13, true)]
+        [DataRow(12, false)]
+        public void ShouldCheckIfItsPrime(int input, bool expectedResult)
+        {
+            //Act
+            bool result = _exercises.IsPrime(input);
+
+            //Assert
+            result.Should().Be(expectedResult);
+        }
+
+        [TestMethod]
+        [DataRow(5)]
+        public void ShouldRetunrPascalsTriangle(int rows)
+        {
+            //Act
+            string result = _exercises.PascalsTriangle(rows);
+
+            //Assert
+            result.Should().Be("    1 \n   1 1 \n  1 2 1 \n 1 3 3 1 \n1 4 6 4 1 ");
+        }
+
+        [TestMethod]
+        [DataRow(1, 50, new int[] { 2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31, 37, 41, 43, 47 })]
+        public void ShouldReturnAllPrimeNumbersWithinRange(int start, int end, int[] expectedResult)
+        {
+            //Act
+            List<int> result = _exercises.PrimeList(start, end);
+
+            //Assert
+            result.Should().Equal(expectedResult);
+        }
+
+        [TestMethod]
+        [DataRow(10, new[] { 0, 1, 1, 2, 3, 5, 8, 13, 21, 34 })]
+        public void ShouldReturnNNumbersOfFibonacciSeries(int values, int[] expectedResult)
+        {
+            //Act
+            int[] result = _exercises.FibonacciSeries(values);
+
+            //Assert
+            result.Should().Equal(expectedResult);
+        }
     }
 }
