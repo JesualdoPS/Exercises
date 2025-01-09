@@ -1,3 +1,5 @@
+using System.ComponentModel;
+using System.Security.Permissions;
 using FluentAssertions;
 using ForLoopLibrary;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
@@ -177,7 +179,7 @@ namespace ForLoopTests
         [TestMethod]
         [DataRow(5, 120)]
         [DataRow(8, 40320)]
-        public void Should(int input, int expectedResult)
+        public void ShouldReturnTheFactorialNumber(int input, int expectedResult)
         {
             //Act
             int result = _exercises.FactorialNumber(input);
@@ -281,7 +283,7 @@ namespace ForLoopTests
         [TestMethod]
         [DataRow(5, "The first 5 natural squares are [1,4,9,16,25] and their sum is 55")]
         [DataRow(10, "The first 10 natural squares are [1,4,9,16,25,36,49,64,81,100] and their sum is 385")]
-        public void Should(int input, string expectedResult)
+        public void ShouldReturnTheSumOfNaturalSquares(int input, string expectedResult)
         {
             //Act
             string result = _exercises.NaturalSquareSum(input);
@@ -404,6 +406,240 @@ namespace ForLoopTests
 
             //Assert
             result.Should().Equal(expectedResult);
+        }
+
+        [TestMethod]
+        [DataRow(4)]
+        public void ShouldCreateAPiramidIncreasingAndDecreasingNumbers(int rows)
+        {
+            //Act
+            string result = _exercises.PiramidOfAccordionEffect(rows);
+
+            //Assert
+            result.Should().Be("   1\n  1 2 1\n 1 2 3 2 1\n1 2 3 4 3 2 1");
+        }
+
+        [TestMethod]
+        [DataRow(12345, 54321)]
+        public void ShouldReturnTheReverseNumber(int input, int expectedResult)
+        {
+            //Act
+            int result = _exercises.ReverseNumber(input);
+
+            //Assert
+            result.Should().Be(expectedResult);
+        }
+
+        [TestMethod]
+        [DataRow(121, true)]
+        [DataRow(341, false)]
+        [DataRow(1001, true)]
+        public void ShouldCheckIfIsAPalindrome(int input, bool expectedResult)
+        {
+            //Act
+            bool result = _exercises.IsPalindrome(input);
+
+            //Assert
+            result.Should().Be(expectedResult);
+        }
+
+        [TestMethod]
+        [DataRow(9, 100, 200, 1683)]
+        public void ShouldReturnTheSumOfAllNumbersDivisibleByNBetweenStartAndEnd(int divisor, int start, int end, int expectedResult)
+        {
+            //Act
+            int result = _exercises.SumOfDivisors(divisor, start, end);
+
+            //Assert
+            result.Should().Be(expectedResult);
+        }
+
+        [TestMethod]
+        [DataRow(4)]
+        public void ShouldCreateAPiramidWithAccordionEffectWithLetters(int rows)
+        {
+            //Act
+            string result = _exercises.PiramidOfAccordionEffectLetters(rows);
+
+            //Assert
+            result.Should().Be($"   A\n  A B A\n A B C B A\nA B C D C B A");
+        }
+
+        [TestMethod]
+        [DataRow(25, 11001)]
+        public void ShouldReturnBinaryWithoutUsingArray(int input, int expectedResult)
+        {
+            //Act
+            int result = _exercises.BinaryOfValue(input);
+
+            //Assert
+            result.Should().Be(expectedResult);
+        }
+
+        [TestMethod]
+        [DataRow(1010101, 85)]
+        [DataRow(10101011, 171)]
+        public void ShouldReturnDecimalNumber(int binary, int expectedResult)
+        {
+            //Act
+            int result = _exercises.DecimalOfABinary(binary);
+
+            //Assert
+            result.Should().Be(expectedResult);
+        }
+
+        [TestMethod]
+        [DataRow(24, 28, 4)]
+        [DataRow(36, 54, 18)]
+        public void ShouldReturnHighestCommonFactor(double n1, double n2, double expectedResult)
+        {
+            //Act
+            double result = _exercises.HighestCommonFactor(n1, n2);
+
+            //Assert
+            result.Should().Be(expectedResult);
+        }
+
+        [TestMethod]
+        [DataRow(15, 20, 60)]
+        public void ShouldReturnLowestCommonFactor(double n1, double n2, double expectedResult)
+        {
+            //Act
+            double result = _exercises.LowestCommonFactor(n1, n2);
+
+            //Assert
+            result.Should().Be(expectedResult);
+        }
+
+        [TestMethod]
+        [DataRow(15, false)]
+        [DataRow(145, true)]
+        public void ShouldCheckIfItsAStrongNumber(int input, bool expectedResult)
+        {
+            //Act
+            bool result = _exercises.IsStrong(input);
+
+            //Assert
+            result.Should().Be(expectedResult);
+        }
+
+        [TestMethod]
+        [DataRow(1, 200, new int[] { 1, 2, 145 })]
+        public void ShouldReturnAListOfStrongNumbers(int start, int end, int[] expectedResult)
+        {
+            //Act
+            List<int> result = _exercises.StrongList(start, end);
+
+            //Assert
+            result.Should().Equal(expectedResult);
+        }
+
+        [TestMethod]
+        [DataRow(1, 10, 4, 190)]
+        public void ShouldReturnTheSumOfArithmeticProgress(int start, int length, int step, int expectedResult)
+        {
+            //Act
+            int result = _exercises.ArithmeticProgressSum(start, length, step);
+
+            //Assert
+            result.Should().Be(expectedResult);
+        }
+
+        [TestMethod]
+        [DataRow(78, 116)]
+        [DataRow(116, 164)]
+        [DataRow(171, 253)]
+        public void ShouldReturnTheOctalEquivalent(int input, int expectedResult)
+        {
+            //Act
+            int result = _exercises.OctalNumber(input);
+
+            //Assert
+            result.Should().Be(expectedResult);
+        }
+
+        [TestMethod]
+        [DataRow(745, 485)]
+        [DataRow(1234, 668)]
+        [DataRow(12345, 5349)]
+        public void ShouldTurnOctalToDecimal(int octal, int expectedResult)
+        {
+            //Act
+            int result = _exercises.DecimalOfOctal(octal);
+
+            //Assert
+            result.Should().Be(expectedResult);
+        }
+
+        [TestMethod]
+        [DataRow(1, 5, 2, 63)]
+        public void ShouldReturnTheSumOfGeometricSeries(double first, int length, int ratio, double expectedResult)
+        {
+            //Act
+            double result = _exercises.SumOfGeometricSeries(first, length, ratio);
+
+            //Assert
+            result.Should().Be(expectedResult);
+        }
+
+        [TestMethod]
+        [DataRow(101, 5)]
+        [DataRow(1101, 15)]
+        [DataRow(10101011, 253)]
+        public void ShouldConvertBinaryToOctal(int binary, int expectedResult)
+        {
+            //Act
+            int result = _exercises.OctalOfBinary(binary);
+
+            //Assert
+            result.Should().Be(expectedResult);
+        }
+
+        [TestMethod]
+        [DataRow(5, 101)]
+        [DataRow(15, 1101)]
+        [DataRow(253, 10101011)]
+        public void ShouldConvertOctalToBinary(int octal, int expectedResult)
+        {
+            //Act
+            int result = _exercises.BinaryOfOctal(octal);
+
+            //Assert
+            result.Should().Be(expectedResult);
+        }
+
+        [TestMethod]
+        [DataRow(79, "4F")]
+        [DataRow(255, "FF")]
+        [DataRow(1234, "4D2")]
+        public void ShouldConvertDecimalToHexadecimal(int input, string expectedResult)
+        {
+            //Act
+            string result = _exercises.HexadecimalOfDecimal(input);
+
+            //Assert
+            result.Should().Be(expectedResult);
+        }
+
+        [TestMethod]
+        [DataRow("Welcome", "emocleW")]
+        public void ShouldReturnStringInReverse(string input, string expectedResult)
+        {
+            //Act
+            string result = _exercises.StringReverse(input);
+
+            //Assert
+            result.Should().Be(expectedResult);
+        }
+
+        [TestMethod]
+        public void ShouldCreateAnAOfAsteriscs()
+        {
+            //Act
+            string result = _exercises.AOfAsteriscs();
+
+            //Assert
+            result.Should().Be(" ***\n\n*   *\n\n*   *\n\n*****\n\n*   *\n\n*   *\n\n*   *\n\n*   *");
         }
     }
 }

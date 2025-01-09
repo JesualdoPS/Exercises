@@ -1,6 +1,8 @@
 ﻿
 
 using System.Linq;
+using System.Reflection;
+using System.Security;
 using System.Text;
 using System.Xml.XPath;
 using static System.Runtime.InteropServices.JavaScript.JSType;
@@ -511,9 +513,287 @@ namespace ForLoopLibrary
             {
                 result[i] = resultTemp;
 
-                resultTemp = result[i] + result[i-1];
+                resultTemp = result[i] + result[i - 1];
             }
             return result;
+        }
+
+        public string PiramidOfAccordionEffect(int rows)
+        {
+            string result = "";
+            int spaces = rows - 1;
+            int num = 1;
+
+            for (int i = 1; i <= rows; i++)
+            {
+                result += new string(' ', spaces);
+                result += string.Join(" ", Enumerable.Range(1, i).Concat(Enumerable.Range(1, i - 1).Reverse())).ToString();
+                result += "\n";
+                spaces--;
+            }
+
+            return result.Substring(0, result.Length - 1);
+        }
+
+        public int ReverseNumber(int input)
+        {
+            string inputString = input.ToString();
+            string result = "";
+
+            for (int i = 1; i <= inputString.Length; i++)
+            {
+                result += inputString[^i];
+            }
+
+            return int.Parse(result);
+        }
+
+        public bool IsPalindrome(int input)
+        {
+            int count = input.ToString().Length / 2;
+
+            for (int i = 0; i <= count; i++)
+            {
+                if (input.ToString()[i] != input.ToString()[^(i + 1)]) return false;
+            }
+            return true;
+        }
+
+        public int SumOfDivisors(int divisor, int start, int end)
+        {
+            int sum = 0;
+
+            for (int i = start; i <= end; i++)
+            {
+                if (i % divisor == 0) sum += i;
+            }
+            return sum;
+        }
+
+        public string PiramidOfAccordionEffectLetters(int rows)
+        {
+            var result = new StringBuilder();
+            int spaces = rows - 1;
+
+            for (int i = 1; i <= rows; i++)
+            {
+                result.Append(' ', spaces);
+                var line = Enumerable.Range('A', i).Concat(Enumerable.Range('A', i - 1).Reverse());
+                result.Append(string.Join(" ", line.Select(c => (char)c)));
+                result.Append("\n");
+                spaces--;
+            }
+            return result.ToString().TrimEnd('\n');
+        }
+
+        public int BinaryOfValue(int input)
+        {
+            string binary = "";
+            int original = input;
+
+            for (; input > 0; input /= 2)
+            {
+                binary = input % 2 + binary;
+            }
+
+            return Convert.ToInt32(binary);
+        }
+
+        public int DecimalOfABinary(int binary)
+        {
+            int decimalValue = 0;
+            string strBinary = binary.ToString();
+            int power = strBinary.Length - 1;
+
+            for (int i = 0; i < strBinary.Length; i++)
+            {
+                if (strBinary[i] == '1')
+                {
+                    decimalValue += (int)Math.Pow(2, power);
+                }
+                power--;
+            }
+            return decimalValue;
+        }
+
+        public double HighestCommonFactor(double n1, double n2)
+        {
+            double result = 0;
+
+            for (int i = 1; i < n1; i++)
+            {
+                double divisor1 = n1 / i;
+                double divisor2 = n2 / i;
+                if (divisor1 % 1 == 0 && divisor2 % 1 == 0) result = i;
+            }
+            return result;
+        }
+
+        public double LowestCommonFactor(double n1, double n2)
+        {
+            double hcf = HighestCommonFactor(n1, n2);
+            return n1 * n2 / hcf;
+        }
+
+        public bool IsStrong(int input)
+        {
+            int sum = 0;
+            string strInput = input.ToString();
+
+            for (int i = 0; i < strInput.Length; i++)
+            {
+                int num = int.Parse(strInput[i].ToString());
+                sum += FactorialNumber(num);
+            }
+            return sum == input;
+        }
+
+        public List<int> StrongList(int start, int end)
+        {
+            var result = new List<int>();
+
+            for (int i = start; i <= end; i++)
+            {
+                if (IsStrong(i)) result.Add(i);
+            }
+            return result;
+        }
+
+        public int ArithmeticProgressSum(int start, int length, int step)
+        {
+            int sum = 0;
+
+            for (int i = start; length > 0; i += step)
+            {
+                sum += i;
+                length--;
+            }
+            return sum;
+        }
+
+        public int OctalNumber(int input)
+        {
+            string result = "";
+            int module = input;
+
+            for (; module > 0; module /= 8)
+            {
+                result = (module % 8).ToString() + result;
+            }
+            return Convert.ToInt32(result);
+        }
+
+        public int DecimalOfOctal(int octal)
+        {
+            int result = 0;
+            string strOctal = octal.ToString();
+            int power = strOctal.Length - 1;
+
+            for (int i = 0; i < strOctal.Length; i++)
+            {
+                int digit = int.Parse(strOctal[i].ToString());
+                result += Convert.ToInt32(digit * (Math.Pow(8, power)));
+                power--;
+            }
+
+            return result;
+        }
+
+        public double SumOfGeometricSeries(double first, int length, int ratio)
+        {
+            double result = 0;
+            double term = first;
+
+            for (int i = 0; i <= length; i++)
+            {
+                result += term;
+                term *= ratio;
+            }
+            return result;
+        }
+
+        public int OctalOfBinary(int binary)
+        {
+            string strBinary = binary.ToString();
+            string result = "";
+            int maxGroupLength = 3;
+
+            for (int i = strBinary.Length - 1; i >= 0; i -= maxGroupLength)
+            {
+                int groupLength = Math.Min(maxGroupLength, i + 1);
+                string group = strBinary.Substring(i - groupLength + 1, groupLength);
+                group = group.PadLeft(maxGroupLength, '0');
+                result = OctalNumber(Convert.ToInt32(group, 2)).ToString() + result;
+            }
+
+            return Convert.ToInt32(result);
+        }
+
+        public int BinaryOfOctal(int octal)
+        {
+            int decimalValue = 0;
+            string strOctal = octal.ToString();
+            int power = strOctal.Length - 1;
+
+            for (int i = 0; i < strOctal.Length; i++)
+            {
+                int digit = int.Parse(strOctal[i].ToString());
+                decimalValue += Convert.ToInt32(digit * (Math.Pow(8, power)));
+                power--;
+            }
+
+            string binary = "";
+            int original = decimalValue;
+
+            for (; decimalValue > 0; decimalValue /= 2)
+            {
+                binary = decimalValue % 2 + binary;
+            }
+
+            return Convert.ToInt32(binary);
+        }
+
+        public string HexadecimalOfDecimal(int input)
+        {
+            string hexadecimal = "";
+            string hexDigits = "0123456789ABCDEF";
+
+            for (; input > 0; input /= 16)
+            {
+                hexadecimal = hexDigits[input % 16] + hexadecimal;
+            }
+            return hexadecimal;
+        }
+
+        public string StringReverse(string input)
+        {
+            string result = "";
+            int count = input.Length;
+
+            for (int i = 1; i <= input.Length; i++)
+            {
+                result += input[^i];
+            }
+            return result;
+        }
+
+        public string AOfAsteriscs()
+        {
+            string result = "";
+            result += " ***\n\n";
+
+            for (int i = 1; i <= 2; i++)
+            {
+                result += "*   *\n\n";
+            }
+
+            result += "*****\n\n";
+
+            for (int j = 1; j <= 4; j++)
+            {
+                result += "*   *\n\n";
+            }
+            return result.TrimEnd();
         }
     }
 }
