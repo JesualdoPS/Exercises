@@ -1,28 +1,4 @@
-﻿
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-using System.Diagnostics;
-using System.Dynamic;
-using System.Runtime.InteropServices;
-using System.Text;
-
-namespace ArrayLibrary
+﻿namespace ArrayLibrary
 {
     public class ArrayClass
     {

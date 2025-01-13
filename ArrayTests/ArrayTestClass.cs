@@ -1,10 +1,6 @@
-using Microsoft.VisualStudio.TestTools.UnitTesting;
-using FluentAssertions;
 using ArrayLibrary;
-using System.Reflection;
-using System.Runtime.InteropServices.ObjectiveC;
-using System.Xml.XPath;
-using System.Net.NetworkInformation;
+using FluentAssertions;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace ArrayTests
 {
