@@ -686,7 +686,6 @@ namespace StackTests
                 };
             }
         }
-
         [TestMethod]
         [DynamicData(nameof(StackSatisfyingCondition))]
         public void ShouldReturnANewStackOnlyBySatisfyingConditionValues(int[] stack, Func<int, bool> condition, int[] expectedResult)
